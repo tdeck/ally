@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: MyString
+  name: MyString
+  status: MyString
+  start_time: 2018-07-01 16:58:08
+  json: 
+  deail_sha: MyString
+
+two:
+  id: MyString
+  name: MyString
+  status: MyString
+  start_time: 2018-07-01 16:58:08
+  json: 
+  deail_sha: MyString

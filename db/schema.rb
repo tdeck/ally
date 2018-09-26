@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_01_235808) do
+ActiveRecord::Schema.define(version: 2018_09_26_062022) do
+
+  create_table "cross_posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "source_meetup"
+    t.string "source_id"
+    t.string "dest_meetup"
+    t.string "dest_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "meetup_events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "muid", limit: 32

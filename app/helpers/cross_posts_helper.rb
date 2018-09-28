@@ -1,0 +1,2 @@
+module CrossPostsHelper
+end

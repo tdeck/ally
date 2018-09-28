@@ -8,10 +8,15 @@ class SessionsController < ApplicationController
    
     session[:credentials] = auth_hash[:credentials].symbolize_keys
 
-    render :plain => "#{auth_hash.pretty_inspect}\n\n\n#{session[:credentials].pretty_inspect}\n\nvalid_session? #{valid_session?}"
+    redirect_to controller: 'events', action: 'list'
   end
 
   def failure
+  end
+
+  def destroy
+    reset_session
+    redirect_to action: :new
   end
 
   # TODO logout action

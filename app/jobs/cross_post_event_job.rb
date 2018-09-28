@@ -26,14 +26,13 @@ class CrossPostEventJob < ApplicationJob
   # TODO maybe fees
 
   # Cross-posts an event, records it, and returns the created event's hash
-  # Useful fields are :id and :link
-  def perform(source_group, event_id, dest_group)
+  def perform(source_group, event_id, dest_group, oauth_token)
     res = RestClient.get(
       "https://api.meetup.com/#{source_group}/events/#{event_id}",
       params: {
         fields: 'how_to_find_us,rsvp_rules,answers,venue_visibility,survey_questions,simple_html_description',
-        key: Rails.application.credentials.meetup_api_key,
       },
+      Authorization: "Bearer #{oauth_token}",
       accept: :json,
     )
 
@@ -59,20 +58,18 @@ class CrossPostEventJob < ApplicationJob
         "https://api.meetup.com/#{dest_group}/events",
         put_js,
         content_type: :json,
-        params: {
-          key: Rails.application.credentials.meetup_api_key,
-        }
+        Authorization: "Bearer #{oauth_token}",
       )
 
       result = JSON.parse(res.body).with_indifferent_access
+
       CrossPost.create!(
         source_meetup: source_group,
         source_id: event_id,
         dest_meetup: dest_group,
         dest_id: result[:id],
+        post_link: result[:link]
       )
-
-      return result
     rescue RestClient::ExceptionWithResponse => e
       puts e.response.body
       throw e

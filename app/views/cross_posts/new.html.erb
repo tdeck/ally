@@ -1,10 +1,32 @@
-<h1>CrossPosts#create</h1>
+<h1>Cross-post event <%= @event_id %></h1>
 
+<h2>Copy event automatically</h2>
 <%= form_tag(cross_posts_path) do %>
+  <%= hidden_field_tag :task, 'generate' %>
   <%= hidden_field_tag :source_group, @source_group %>
   <%= hidden_field_tag :event_id, @event_id %>
 
   <%= label_tag :dest_group, 'Destination group slug:' %>
   <%= text_field_tag :dest_group %>
+  <%= submit_tag 'Submit' %>
+
+  <p>
+    <strong>
+      This will create a draft event. You must manually review and publish it.
+    </strong>
+  </p>
+<% end %>
+
+<h2>Associate manually copied event</h2>
+Use this if you've already copied an event manually and you want to associate 
+them to group and manage RSVPs.
+
+<%= form_tag(cross_posts_path) do %>
+  <%= hidden_field_tag :task, 'record' %>
+  <%= hidden_field_tag :source_group, @source_group %>
+  <%= hidden_field_tag :event_id, @event_id %>
+
+  <%= label_tag :copy_event_id, 'Event ID of the copy:' %>
+  <%= text_field_tag :copy_event_id %>
   <%= submit_tag 'Submit' %>
 <% end %>

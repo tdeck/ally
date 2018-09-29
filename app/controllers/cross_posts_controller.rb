@@ -19,6 +19,8 @@ class CrossPostsController < ApplicationController
         params.require(:dest_group),
         oauth_token
       )
+
+      redirect_to event_path(event_id), notice: "Posted draft event to #{post.post_link}"
     elsif task == 'record'
       copy_id = params.require(:copy_event_id)
       if copy_id == event_id
@@ -52,14 +54,10 @@ class CrossPostsController < ApplicationController
         dest_id: copy_id,
         post_link: copy_fields[:event_url],
       )
+
+      redirect_to event_path(event_id), notice: "Recorded cross-posted event named #{copy_fields[:name]}"
     else
       raise "Unknown task #{task}"
     end
-
-    redirect_to cross_post_path(post)
-  end
-
-  def show
-    @post = CrossPost.find_by_id!(params[:id])
   end
 end

@@ -10,6 +10,12 @@
   </head>
 
   <body>
+    <% if alert.present? %>
+      <p id="flash-alert"><%= alert %></p>
+    <% end %>
+    <% if notice.present? %>
+      <p id="flash-notice"><%= notice %></p>
+    <% end %>
     <%= yield %>
   </body>
 </html>

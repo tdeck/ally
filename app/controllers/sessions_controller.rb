@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
    
     session[:credentials] = auth_hash[:credentials].symbolize_keys
 
-    redirect_to controller: 'events', action: 'list'
+    redirect_to controller: 'events', action: 'index'
   end
 
   def failure

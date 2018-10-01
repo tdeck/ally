@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  resources :cross_posts, only: [:new, :create]
   resources :events, only: [:index, :show]
+  resources :cross_posts, only: [:new, :create]
+
+  resources :newsletters, only: [:new, :create]
 
   # OAuth routes
   get '/login', :to => 'sessions#new', :as => :login

@@ -1,0 +1,57 @@
+/* Based on https://www.sitepoint.com/create-calendar-icon-html5-css3/ */
+
+.time {
+  font-size: .66em; /* change icon size */
+  width: 7em !important;
+  height: 7em;
+  background-color: #fff;
+  margin: 0 auto;
+  overflow: hidden;
+  font-weight: bold;
+  font-style: normal;
+  text-align: center;
+
+  border-spacing: 0;
+
+  border-radius: 0.6em;
+  background-color: #fd9f1b;
+  box-shadow: 0 1px 0 #bdbdbd, 1px 0 0 #efefef;
+}
+
+.time tr {
+  width: 7em;
+}
+
+.time tr td {
+  padding: 0;
+  border-spacing: 0;
+  border-color: #fff;
+  border-width: 1px;
+}
+
+.time tr.month td {
+  padding: 0.4em 0;
+  color: #fff;
+  border-bottom: 1px dashed #f37302;
+  box-shadow: 0 2px 0 #fd9f1b;
+}
+
+.time tr.mday {
+  background-color: #fff;
+}
+
+.time tr.mday td {
+  font-size: 2.8em;
+  letter-spacing: -0.05em;
+  color: #2f2f2f;
+}
+
+.time tr.wday {
+  background-color: #fff;
+}
+
+.time tr.wday td {
+  padding-bottom: 0.3em;
+  color: #fd9f1b;
+  background-color: #fff;
+}

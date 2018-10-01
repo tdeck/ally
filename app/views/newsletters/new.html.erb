@@ -1,0 +1,43 @@
+<%= form_tag(newsletters_path) do %>
+  <%= label_tag :main_title, 'Newsletter title:' %>
+  <%= text_field_tag :main_title %>
+  <br>
+
+  <%= label_tag :hero_url, 'Hero image URL:' %>
+  <%= text_field_tag :hero_url %>
+  <br>
+  <%= label_tag :hero_alt, 'Hero image ALT text:' %>
+  <%= text_field_tag :hero_alt %>
+
+  <% @templated_events.each_with_index do |event, i| %>
+    <fieldset>
+      <%# This uses a strange array feature of forms in Rails %> 
+      <%= label_tag 'events[][included]', 'Included?' %>
+      <%= check_box_tag 'events[][included]', 1, true %>
+      <br>
+
+      <% NewslettersHelper::SHORT_INPUT_FIELDS.each do |key| 
+        name = "events[][#{key}]"
+      %>
+        <%= label_tag name, key %>
+        <%= text_field_tag name, event[key] %>
+        <br>
+      <% end %>
+
+      <% NewslettersHelper::TEXTAREA_FIELDS.each do |key| 
+        name = "events[][#{key}]"
+      %>
+        <%= label_tag name, key %>
+        <br>
+        <%= text_area_tag name, event[key], rows: 10, cols: 80 %>
+        <br>
+      <% end %>
+
+      <% (event.keys - NewslettersHelper::VISIBLE_FIELDS).each do |key| %>
+        <%= hidden_field_tag "events[][#{key}]", event[key] %>
+      <% end %>
+    </fieldset>
+  <% end %>
+
+  <%= submit_tag 'Submit' %>
+<% end %>

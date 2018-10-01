@@ -13,4 +13,8 @@ module ApplicationHelper
   def oauth_token
     session[:credentials][:token]
   end
+
+  def meetup_client
+    @meetup_client ||= MeetupClient.new(oauth_token)
+  end
 end

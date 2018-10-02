@@ -8,6 +8,7 @@ class NewslettersController < ApplicationController
       .map { |event|
         time = Time.at(event[:time] / 1000)
         {
+          id: event[:id],
           url: event[:link],
           title: event[:name],
           month: time.strftime('%B'),
@@ -20,11 +21,12 @@ class NewslettersController < ApplicationController
   end
 
   def create
+    included_ids = params.require(:included_ids).to_set
     template_params = {
       main_title: params.require(:main_title),
       hero_url: params.require(:hero_url),
       hero_alt: params.require(:hero_alt),
-      events: params.require(:events).select { |e| e[:included] }.map(&:permit!)
+      events: params.require(:events).select { |e| e[:id].in?(included_ids) }.map(&:permit!)
     }
 
     premailer = Premailer.new(

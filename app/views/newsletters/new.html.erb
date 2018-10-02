@@ -12,8 +12,8 @@
   <% @templated_events.each_with_index do |event, i| %>
     <fieldset>
       <%# This uses a strange array feature of forms in Rails %> 
-      <%= label_tag 'events[][included]', 'Included?' %>
-      <%= check_box_tag 'events[][included]', 1, true %>
+      <%= label_tag 'included_ids[]', 'Included?' %>
+      <%= check_box_tag 'included_ids[]', event[:id], true, multiple: true %>
       <br>
 
       <% NewslettersHelper::SHORT_INPUT_FIELDS.each do |key| 

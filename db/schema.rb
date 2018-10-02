@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_28_072843) do
+ActiveRecord::Schema.define(version: 2018_09_29_234258) do
 
   create_table "cross_posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "source_meetup"

@@ -21,12 +21,14 @@ class NewslettersController < ApplicationController
   end
 
   def create
-    included_ids = params.require(:included_ids).to_set
+    sections = params.require(:sections)[0] # id -> section # TODO understand what [0] does
+
     template_params = {
       main_title: params.require(:main_title),
       hero_url: params.require(:hero_url),
       hero_alt: params.require(:hero_alt),
-      events: params.require(:events).select { |e| e[:id].in?(included_ids) }.map(&:permit!)
+      our_events: params.require(:events).select { |e| sections[e[:id]] == 'ours' }.map(&:permit!),
+      other_events: params.require(:events).select { |e| sections[e[:id]] == 'others' }.map(&:permit!),
     }
 
     premailer = Premailer.new(

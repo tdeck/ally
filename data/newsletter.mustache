@@ -54,8 +54,14 @@
         </table>
       </div><!-- /content -->
       
-      <!-- EVENT -->
-      {{#events}}
+      <div class="content"><table bgcolor="">
+        <tr>
+          <td>
+            <h3>Our events</h3>
+          </td>
+        </tr>
+      </table></div><!-- /content -->
+      {{#our_events}}
       <!-- EVENT -->
       <!-- content -->
       <div class="content">
@@ -85,8 +91,46 @@
         </table>
       </div><!-- /content -->
       <!-- ENDEVENT -->
-      {{/events}}
+      {{/our_events}}
+
+      <div class="content"><table bgcolor="">
+        <tr>
+          <td>
+            <h3>Other local events</h3>
+          </td>
+        </tr>
+      </table></div><!-- /content -->
+      {{#other_events}}
+      <!-- EVENT -->
+      <!-- content -->
+      <div class="content">
+        
+        <table bgcolor="">
+          <tr>
+            <td class="small" width="20%" style="vertical-align: top; padding-right:10px; padding-top: 0;">
+              <table class="time">
+                <tr class="month"><!-- strong -->
+                  <td>{{month}}</td>
+                </tr>
+                <tr class="mday"><!-- span -->
+                  <td>{{mday}}</td>
+                </tr>
+                <tr class="wday"><!-- em -->
+                  <td>{{wday}}</td>
+                </tr>
+              </table>
+            </td>
+            <td>
+              <h4>{{title}}</h4>
+
+              <p class="">{{{description}}}</p>
+              <a class="btn" href="{{url}}">More info &raquo;</a>
+            </td>
+          </tr>
+        </table>
+      </div><!-- /content -->
       <!-- ENDEVENT -->
+      {{/other_events}}
       
       <!-- content -->
       <div class="content">

@@ -1,6 +1,4 @@
 class NamedUsersController < ApplicationController
-  before_action :require_session
-
   def create
     params.require(:full_name)
     params.require(:meetup_id) # This is the *user's* meetup ID

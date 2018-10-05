@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_before_action :require_session!
+
   def new
     redirect_to '/auth/meetup'
   end

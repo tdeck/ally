@@ -1,6 +1,4 @@
 class CrossPostsController < ApplicationController
-  before_action :require_session
-
   def new
     @source_group = Rails.application.config.group_slug
     @event_id = params[:event_id]

@@ -1,7 +1,9 @@
 class ApplicationController < ActionController::Base
   include ApplicationHelper
 
-  def require_session
+  before_action :require_session!
+
+  def require_session!
     unless valid_session?
       redirect_to '/login'
     end

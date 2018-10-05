@@ -1,8 +1,6 @@
 class EventsController < ApplicationController
   NUM_EVENTS = 10
 
-  before_action :require_session
-
   def index
     @events = meetup_client.list_upcoming_events(group_slug, NUM_EVENTS)
   end

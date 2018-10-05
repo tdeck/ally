@@ -42,3 +42,20 @@ Meetup link: <a href="<% @event[:link] %>"><%= @event[:link] %></a>
     <% end %>
   </tbody>
 </table>
+
+<h2>Copyable RSVPs</h2>
+<small>Click on the list below to select all</small>
+<div class="select-all">
+  <%# TODO sort this by verified name; right now it's sorted by the regular name %>
+  <% @rsvps.each do |rsvp| %>
+    <% if rsvp[:verified_name] %>
+      <%= rsvp[:verified_name] %>
+    <% else %>
+      <%= rsvp[:name] %>*
+    <% end %>
+    <br>
+  <% end %>
+
+  <br>
+  * These attendees did not provide a full name, and we weren't able to reach them before this list was compiled.
+</div>

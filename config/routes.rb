@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   resources :events, only: [:index, :show]
   resources :cross_posts, only: [:new, :create]
 
+  resources :named_users, only: [:create]
+
   resources :newsletters, only: [:new, :create]
 
   # OAuth routes

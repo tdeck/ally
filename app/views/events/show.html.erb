@@ -8,3 +8,37 @@ Meetup link: <a href="<% @event[:link] %>"><%= @event[:link] %></a>
     <li><a href="<%= post.post_link %>"><%= post.post_link %></a></li>
   <% end %>
 </ul>
+
+<h2>RSVPs (<%= @rsvps.count %>)</h2>
+<table>
+  <thead>
+    <tr>
+      <td>Username</td>
+      <td>Supplied name</td>
+      <td>Real name</td>
+    </tr>
+  </thead>
+    <tbody>
+    <% @rsvps.each do |rsvp| %>
+      <%= form_tag(named_users_path) do %>
+        <%= hidden_field_tag :return_to_event, @event[:id] %>
+        <%= hidden_field_tag :meetup_id, rsvp[:uid] %>
+        <tr>
+          <td>
+            <%= rsvp[:name] %>
+          </td>
+          <td>
+            <%= text_field_tag :full_name, rsvp[:answer], readonly: rsvp[:verified_name].present? %>
+          </td>
+          <td>
+            <% if rsvp[:verified_name] %>
+              <%= rsvp[:verified_name] %>
+            <% else %>
+              <%= submit_tag '⟶ Store as real name' %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

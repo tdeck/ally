@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_29_234258) do
+ActiveRecord::Schema.define(version: 2018_10_02_072358) do
 
   create_table "cross_posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "source_meetup"
@@ -31,6 +31,13 @@ ActiveRecord::Schema.define(version: 2018_09_29_234258) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["muid"], name: "index_meetup_events_on_muid", unique: true
+  end
+
+  create_table "named_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "full_name"
+    t.string "meetup_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

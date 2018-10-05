@@ -6,4 +6,8 @@ class ApplicationController < ActionController::Base
       redirect_to '/login'
     end
   end
+
+  def group_slug
+    Rails.application.config.group_slug
+  end
 end

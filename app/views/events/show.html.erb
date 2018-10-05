@@ -28,7 +28,11 @@ Meetup link: <a href="<% @event[:link] %>"><%= @event[:link] %></a>
             <%= rsvp[:name] %>
           </td>
           <td>
-            <%= text_field_tag :full_name, rsvp[:answer], readonly: rsvp[:verified_name].present? %>
+            <% if rsvp[:verified_name].present? %>
+              <%= rsvp[:answer] %>
+            <% else %>
+              <%= text_field_tag :full_name, rsvp[:answer] %>
+            <% end %>
           </td>
           <td>
             <% if rsvp[:verified_name] %>

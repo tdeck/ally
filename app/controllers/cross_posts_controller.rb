@@ -1,8 +1,8 @@
 class CrossPostsController < ApplicationController
   def new
-    @source_group = Rails.application.config.group_slug
+    @source_group = group_slug
     @event_id = params[:event_id]
-    @managed_groups = meetup_client.list_managed_groups(session['uid'])
+    @other_groups = meetup_client.list_managed_groups(session['uid']).reject { |g| g[:urlname] == group_slug }
   end
 
   def create

@@ -7,7 +7,7 @@
   <%= hidden_field_tag :event_id, @event_id %>
 
   <%= label_tag :dest_group, 'Destination group:' %>
-  <%= select_tag :dest_group, options_for_select(@managed_groups.map { |g| g.values_at(:name, :urlname) }) %>
+  <%= select_tag :dest_group, options_for_select(@other_groups.map { |g| g.values_at(:name, :urlname) }) %>
   <%= submit_tag 'Submit' %>
 
   <p>

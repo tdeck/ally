@@ -6,9 +6,10 @@ class SessionsController < ApplicationController
   end
 
   def create
-    auth_hash = request.env['omniauth.auth']
-   
-    session[:credentials] = auth_hash[:credentials].symbolize_keys
+    auth = request.env['omniauth.auth']
+
+    session['uid'] = auth.uid
+    session['credentials'] = auth.credentials
 
     redirect_to controller: 'events', action: 'index'
   end

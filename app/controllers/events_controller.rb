@@ -36,7 +36,10 @@ class EventsController < ApplicationController
         name: r[:member][:name],
         answer: answer_string.present? ? answer_string : nil,
         verified_name: NamedUser.find_by_meetup_id(uid)&.full_name,
+        plus: r[:guests],
       }
     end.sort { |p, q| p[:name].casecmp(q[:name]) }
+
+    @rsvp_count = @rsvps.count + @rsvps.map {|r| r[:plus] }.sum
   end
 end

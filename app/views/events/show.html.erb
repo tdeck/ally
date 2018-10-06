@@ -9,7 +9,7 @@ Meetup link: <a href="<%= @event[:link] %>"><%= @event[:link] %></a>
   <% end %>
 </ul>
 
-<h2>RSVPs (<%= @rsvps.count %>)</h2>
+<h2>RSVPs (<%= @rsvp_count %>)</h2>
 <table>
   <thead>
     <tr>
@@ -56,6 +56,9 @@ Meetup link: <a href="<%= @event[:link] %>"><%= @event[:link] %></a>
       <%= rsvp[:verified_name] %>
     <% else %>
       <%= rsvp[:name] %>*
+    <% end %>
+    <% if rsvp[:plus] > 0 %>
+      +<%= rsvp[:plus] %>
     <% end %>
     <br>
   <% end %>

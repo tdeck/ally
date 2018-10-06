@@ -20,29 +20,29 @@ Meetup link: <a href="<%= @event[:link] %>"><%= @event[:link] %></a>
   </thead>
     <tbody>
     <% @rsvps.each do |rsvp| %>
-      <%= form_tag(named_users_path) do %>
-        <%= hidden_field_tag :return_to_event, @event[:id] %>
-        <%= hidden_field_tag :meetup_id, rsvp[:uid] %>
-        <tr>
-          <td>
-            <%= rsvp[:name] %>
-          </td>
-          <td>
+      <tr>
+        <td>
+          <%= rsvp[:name] %>
+        </td>
+        <td>
+          <%= form_tag(named_users_path, {id: "form_u#{rsvp[:uid]}"}) do %>
+            <%= hidden_field_tag :return_to_event, @event[:id] %>
+            <%= hidden_field_tag :meetup_id, rsvp[:uid] %>
             <% if rsvp[:verified_name].present? %>
               <%= rsvp[:answer] %>
             <% else %>
               <%= text_field_tag :full_name, rsvp[:answer] %>
             <% end %>
-          </td>
-          <td>
-            <% if rsvp[:verified_name] %>
-              <%= rsvp[:verified_name] %>
-            <% else %>
-              <%= submit_tag '⟶ Store as real name' %>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
+          <% end %>
+        </td>
+        <td>
+          <% if rsvp[:verified_name] %>
+            <%= rsvp[:verified_name] %>
+          <% else %>
+            <%= submit_tag '⟶ Store as real name', form: "form_u#{rsvp[:uid]}" %>
+          <% end %>
+        </td>
+      </tr>
     <% end %>
   </tbody>
 </table>

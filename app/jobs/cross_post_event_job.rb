@@ -7,7 +7,6 @@ class CrossPostEventJob < ApplicationJob
 
   FIELDS_TO_COPY = {
     :name => ['name'],
-    :description => ['simple_html_description'],
     :time => ['time'],
     :duration => ['duration'],
     :how_to_find_us => ['how_to_find_us'],
@@ -52,6 +51,13 @@ class CrossPostEventJob < ApplicationJob
       end
     end
 
+    orig_link = got_js['link']
+    orig_description = got_js['simple_html_description']
+
+    put_js[:description] = Mustache.render(template, {
+      orig_link: orig_link,
+      orig_description: orig_description,
+    })
     begin
       puts put_js.to_json
       res = RestClient.post(
@@ -74,5 +80,9 @@ class CrossPostEventJob < ApplicationJob
       puts e.response.body
       throw e
     end
+  end
+
+  def template
+    @template ||= File.read(File.join(Rails.root, 'data', 'crosspost.mustache'))
   end
 end

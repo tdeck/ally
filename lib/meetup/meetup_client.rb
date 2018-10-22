@@ -43,5 +43,7 @@ class MeetupClient
     )
 
     JSON.parse(res.body).map(&:with_indifferent_access)
+  rescue RestClient::Gone # If the event's been deleted it can't have RSVPs
+    return []
   end
 end

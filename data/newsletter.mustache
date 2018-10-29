@@ -93,13 +93,16 @@
       <!-- ENDEVENT -->
       {{/our_events}}
 
+      {{#other_events.length}} {{! Show this heading only if there is at least one such event }}
       <div class="content"><table bgcolor="">
         <tr>
           <td>
-            <h3>Local happenings</h3>
+            <h3>Local highlights</h3>
           </td>
         </tr>
       </table></div><!-- /content -->
+      {{/other_events.length}}
+
       {{#other_events}}
       <!-- EVENT -->
       <!-- content -->

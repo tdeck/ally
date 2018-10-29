@@ -15,7 +15,7 @@ class NewslettersController < ApplicationController
           mday: time.mday,
           wday: time.strftime('%A'),
           location: format_location(event),
-          description: event[:description],
+          description_html: event[:description],
         }
       }
   end

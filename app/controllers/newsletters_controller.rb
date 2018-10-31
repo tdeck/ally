@@ -17,7 +17,7 @@ class NewslettersController < ApplicationController
           location: format_location(event),
           description_html: event[:description],
         }
-      }
+      } + NonMeetupEvent.not_ended.map(&:present)
   end
 
   def create

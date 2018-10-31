@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :named_users, only: [:create]
 
   resources :newsletters, only: [:new, :create]
+  resources :non_meetup_events, only: [:new, :create]
 
   # OAuth routes
   get '/login', :to => 'sessions#new', :as => :login

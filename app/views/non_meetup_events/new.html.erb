@@ -1,0 +1,17 @@
+<%= form_with model: @event do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+  <%= f.label :url %>
+  <%= f.url_field :url %>
+
+  <%= f.label :start_date %>
+  <%= f.date_field :start_date %>
+
+  <%= f.label :end_date %>
+  <%= f.date_field :end_date %>
+
+  <%= f.label :description_html %>
+  <%= f.text_area :description_html %>
+  <%= f.submit %>
+<% end %>

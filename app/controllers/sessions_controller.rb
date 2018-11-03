@@ -8,7 +8,15 @@ class SessionsController < ApplicationController
   def create
     auth = request.env['omniauth.auth']
 
-    session['uid'] = auth.uid
+    uid = auth.uid
+    raise 'Wrong uid type' unless uid.is_a?(Integer)
+
+    unless Rails.application.config.admin_ids.include?(uid)
+      # TODO show a proper error page
+      raise 'This meetup user is not authorized to use Ally. Contact the Ally administrator for access.'
+    end
+
+    session['uid'] = uid
     session['credentials'] = auth.credentials
 
     redirect_to controller: 'events', action: 'index'

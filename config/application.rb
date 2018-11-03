@@ -19,5 +19,9 @@ module Ally
     config.autoload_paths += Dir["#{config.root}/lib", "#{config.root}/lib/**/"]
 
     config.group_slug = 'sfhumanists'
+    config.admin_ids = [
+      10647539, # Jim Barnett
+      150060702, # Troy Deck
+    ]
   end
 end

@@ -4,13 +4,13 @@ class NonMeetupEventsController < ApplicationController
   end
 
   def create
-    NonMeetupEvent.new(params.require(:non_meetup_event).permit(
+    NonMeetupEvent.create!(params.require(:non_meetup_event).permit(
       :title,
       :url,
       :start_date,
       :end_date,
       :description_html,
-    )).save!
+    ))
 
     redirect_to controller: 'events', action: 'index', notice: 'Created'
   end

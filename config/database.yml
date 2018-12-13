@@ -20,4 +20,6 @@ test:
 
 production:
   <<: *default
-  # TODO
+  database: ally
+  username: <%= Rails.application.credentials.dig(:prod_db, :username) %>
+  password: <%= Rails.application.credentials.dig(:prod_db, :password) %>

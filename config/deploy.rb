@@ -8,9 +8,10 @@ set :deploy_to, "/var/www/ally"
 # Default value for local_user is ENV['USER']
 set :local_user, 'deploy'
 
-
 set :nginx_server_name, 'ally.sfhumanists.org'
 # set :nginx_use_ssl, true # TODO get http working first
+
+append :linked_files, "config/master.key"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp

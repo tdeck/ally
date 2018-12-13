@@ -3,7 +3,7 @@
 # Defines a single server with a list of roles and multiple properties.
 # You can define all roles on a single server, or split them:
 
-server 'sfhumanists.org', roles: [:web, :app, :db], primary: true
+server 'sfhumanists.org', user: 'deploy', roles: [:web, :app, :db], primary: true
 
 # role-based syntax
 # ==================

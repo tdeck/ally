@@ -25,6 +25,7 @@ append :linked_files, "config/master.key"
 
 # Default value for :pty is false
 set :pty, true # Needed to support sudo for uploading nginx config
+role :puma_nginx, %w{troy@sfhumanists.org} # Needs to be a sudoer, which deploy user is not
 
 # Default value for :linked_files is []
 # append :linked_files, "config/database.yml"

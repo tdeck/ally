@@ -7,17 +7,18 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-    <link rel="stylesheet" href="https://unpkg.com/sakura.css@1.0.0/css/sakura-earthly.css" type="text/css">
   </head>
 
   <body>
     <% if alert.present? %>
-      <p id="flash-alert"><%= alert %></p>
+      <div class="m00 px2 bg--red fnt--white h4"><%= flash[:alert] %></div>
     <% end %>
     <% if notice.present? %>
-      <p id="flash-notice"><%= notice %></p>
+      <div class="m00 px2 bg--green fnt--white h4"><%= flash[:notice] %></div>
     <% end %>
-    <%= yield %>
+
+    <main class="measure py2">
+      <%= yield %>
+    </main>
   </body>
 </html>

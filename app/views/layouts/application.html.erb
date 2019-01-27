@@ -7,17 +7,20 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <link rel="stylesheet" href="https://unpkg.com/picnic">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><%# Required for responsive layout %>
   </head>
 
   <body>
     <% if alert.present? %>
-      <div class="m00 px2 bg--red fnt--white h4"><%= flash[:alert] %></div>
+      <div class="flashbar label error"><%= flash[:alert] %></div>
     <% end %>
     <% if notice.present? %>
-      <div class="m00 px2 bg--green fnt--white h4"><%= flash[:notice] %></div>
+      <div class="flashbar label success"><%= flash[:notice] %></div>
     <% end %>
 
-    <main class="measure py2">
+    <main>
       <%= yield %>
     </main>
   </body>

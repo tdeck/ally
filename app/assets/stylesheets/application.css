@@ -12,16 +12,10 @@
  *
  *= require_tree .
  *= require_self
- *= require furtive.css
  */
 
-.flash-notice {
-  font-size: 110%;
-  color: green;
-}
-
-.flash-alert {
-  font-size: 110%;
-  font-weight: bold;
-  color: red;
+div.flashbar {
+  display: block;
+  margin: 0 0 0 0;
+  font-size: inherit;
 }

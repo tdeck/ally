@@ -1,64 +1,70 @@
 <div>
-  <div>
-    <%= form_tag(newsletters_path) do %>
+  <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+
+  <%= form_tag(newsletters_path) do %>
+    <div class="card">
+      <header>Intro content</header>
+      <section>
+        <%= label_tag :main_title, 'Newsletter title:' %>
+        <%= text_field_tag :main_title %>
+        <br>
+
+        <%= label_tag :hero_url, 'Hero image URL:' %>
+        <%= text_field_tag :hero_url %>
+        <small>Size should be 600x300. <a href="https://www.befunky.com/create/collage/">This tool is helpful in making collages.</a></small>
+
+        <br>
+        <%= label_tag :hero_alt, 'Hero image ALT text:' %>
+        <%= text_field_tag :hero_alt %>
+        <small>This will be read by blind recipients and will also be displayed if the image can't load.</small>
+      </section>
+    </div>
+
+    <% @templated_events.each_with_index do |event, i| %>
       <div class="card">
-        <header>Intro content</header>
         <section>
-          <%= label_tag :main_title, 'Newsletter title:' %>
-          <%= text_field_tag :main_title %>
+          <%# This uses a strange array feature of forms in Rails %>
+
+          <%= radio_button_tag "sections[]#{event[:id]}", 'ours' %>
+          <%= label_tag "sections[]#{event[:id]}_ours", 'Our event', class: 'checkable' %>
+
+          <%= radio_button_tag "sections[]#{event[:id]}", 'others' %>
+          <%= label_tag "sections[]#{event[:id]}_others", 'Other event', class: 'checkable' %>
+
+          <%= radio_button_tag "sections[]#{event[:id]}", 'none', true %>
+          <%= label_tag "sections[]#{event[:id]}_none", 'Excluded', class: 'checkable' %>
           <br>
 
-          <%= label_tag :hero_url, 'Hero image URL:' %>
-          <%= text_field_tag :hero_url %>
-          <small>Size should be 600x300. <a href="https://www.befunky.com/create/collage/">This tool is helpful in making collages.</a></small>
+          <% NewslettersHelper::SHORT_INPUT_FIELDS.each do |key|
+            name = "events[][#{key}]"
+          %>
+            <%= label_tag name, key %>
+            <%= text_field_tag name, event[key] %>
+            <br>
+          <% end %>
 
-          <br>
-          <%= label_tag :hero_alt, 'Hero image ALT text:' %>
-          <%= text_field_tag :hero_alt %>
-          <small>This will be read by blind recipients and will also be displayed if the image can't load.</small>
+          <% NewslettersHelper::TEXTAREA_FIELDS.each do |key|
+            name = "events[][#{key}]"
+          %>
+            <%= label_tag name, key %>
+            <br>
+            <%= text_area_tag name, event[key], rows: 10, cols: 80, class: 'richtext' %>
+            <br>
+          <% end %>
+
+          <% (event.keys - NewslettersHelper::VISIBLE_FIELDS).each do |key| %>
+            <%= hidden_field_tag "events[][#{key}]", event[key] %>
+          <% end %>
         </section>
       </div>
+    <% end %>
 
-      <% @templated_events.each_with_index do |event, i| %>
-        <div class="card">
-          <section>
-            <%# This uses a strange array feature of forms in Rails %>
+    <%= submit_tag 'Submit' %>
+  <% end # form %>
 
-            <%= radio_button_tag "sections[]#{event[:id]}", 'ours' %>
-            <%= label_tag "sections[]#{event[:id]}_ours", 'Our event', class: 'checkable' %>
-
-            <%= radio_button_tag "sections[]#{event[:id]}", 'others' %>
-            <%= label_tag "sections[]#{event[:id]}_others", 'Other event', class: 'checkable' %>
-
-            <%= radio_button_tag "sections[]#{event[:id]}", 'none', true %>
-            <%= label_tag "sections[]#{event[:id]}_none", 'Excluded', class: 'checkable' %>
-            <br>
-
-            <% NewslettersHelper::SHORT_INPUT_FIELDS.each do |key|
-              name = "events[][#{key}]"
-            %>
-              <%= label_tag name, key %>
-              <%= text_field_tag name, event[key] %>
-              <br>
-            <% end %>
-
-            <% NewslettersHelper::TEXTAREA_FIELDS.each do |key|
-              name = "events[][#{key}]"
-            %>
-              <%= label_tag name, key %>
-              <br>
-              <%= text_area_tag name, event[key], rows: 10, cols: 80 %>
-              <br>
-            <% end %>
-
-            <% (event.keys - NewslettersHelper::VISIBLE_FIELDS).each do |key| %>
-              <%= hidden_field_tag "events[][#{key}]", event[key] %>
-            <% end %>
-          </section>
-        </div>
-      <% end %>
-
-      <%= submit_tag 'Submit' %>
-    <% end # form %>
-  </div>
+  <script>
+    new MediumEditor(
+      document.getElementsByClassName('richtext'));
+  </script>
 </div>

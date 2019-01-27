@@ -25,3 +25,7 @@ div.flashbar {
   margin: 0 0 0 0;
   font-size: inherit;
 }
+
+.richtext {
+  font-size: 10pt;
+}

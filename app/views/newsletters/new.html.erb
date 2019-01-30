@@ -1,7 +1,9 @@
+<% content_for :head do %>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.13.0/trumbowyg.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.13.0/ui/trumbowyg.min.css">
+<% end %>
 <div>
-  <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
-
   <%= form_tag(newsletters_path) do %>
     <div class="card">
       <header>Intro content</header>
@@ -64,7 +66,26 @@
   <% end # form %>
 
   <script>
-    new MediumEditor(
-      document.getElementsByClassName('richtext'));
+    <%#
+      I have to vendor this file because CloudFlare's CDN refuses to set broad CORS headers
+      that would permit the SVG file to be loaded on localhost.
+    %>
+    $.trumbowyg.svgPath = '/trumbowyg.svg';
+
+    $('.richtext').trumbowyg({
+      btns: [
+        ['viewHTML'],
+        ['undo', 'redo'], // Only supported in Blink browsers
+        ['formatting'],
+        ['strong', 'em', 'del'],
+        ['link'],
+        // ['insertImage'],
+        ['unorderedList', 'orderedList'],
+        ['horizontalRule'],
+        ['removeformat'],
+        ['fullscreen'],
+      ],
+      resetCss: true
+    });
   </script>
 </div>

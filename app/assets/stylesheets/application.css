@@ -26,6 +26,9 @@ div.flashbar {
   font-size: inherit;
 }
 
-.richtext {
-  font-size: 10pt;
+textarea.richtext {
+  /* Hide the placeholder textareas that will be turned into WYSIWYG editors
+   * as the page loads, but make them take up space so the DOM doesn't reflow
+   * so much. */
+  visibility: hidden;
 }

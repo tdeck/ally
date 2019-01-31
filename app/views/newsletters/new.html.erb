@@ -38,24 +38,19 @@
           <%= label_tag "sections[]#{event[:id]}_none", 'Excluded', class: 'checkable' %>
           <br>
 
-          <% NewslettersHelper::SHORT_INPUT_FIELDS.each do |key|
-            name = "events[][#{key}]"
-          %>
-            <%= label_tag name, key %>
-            <%= text_field_tag name, event[key] %>
-            <br>
-          <% end %>
+          <%= label_tag 'events[][title]', 'Title' %>
+          <%= text_field_tag 'events[][title]', event[:title] %>
+          <br>
 
-          <% NewslettersHelper::TEXTAREA_FIELDS.each do |key|
-            name = "events[][#{key}]"
-          %>
-            <%= label_tag name, key %>
-            <br>
-            <%= text_area_tag name, event[key], rows: 10, cols: 80, class: 'richtext' %>
-            <br>
-          <% end %>
+          <%= label_tag 'events[][url]', 'URL' %>
+          <%= text_field_tag 'events[][url]', event[:url] %>
+          <br>
 
-          <% (event.keys - NewslettersHelper::VISIBLE_FIELDS).each do |key| %>
+          <%= label_tag 'events[][description_html]', 'Description' %>
+          <br>
+          <%= text_area_tag 'events[][description_html]', event[:description_html], rows: 10, cols: 80, class: 'richtext' %>
+
+          <% NewslettersHelper::HIDDEN_EVENT_FIELDS.each do |key| %>
             <%= hidden_field_tag "events[][#{key}]", event[key] %>
           <% end %>
         </section>

@@ -27,6 +27,7 @@ class NewslettersController < ApplicationController
       main_title: params.require(:main_title),
       hero_url: params.require(:hero_url),
       hero_alt: params.require(:hero_alt),
+      lead_html: params.require(:lead_html),
       our_events: params.require(:events).select { |e| sections[e[:id]] == 'ours' }.map(&:permit!),
       other_events: params.require(:events).select { |e| sections[e[:id]] == 'others' }.map(&:permit!),
     }

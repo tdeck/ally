@@ -15,11 +15,16 @@
         <%= label_tag :hero_url, 'Hero image URL:' %>
         <%= text_field_tag :hero_url %>
         <small>Size should be 600x300. <a href="https://www.befunky.com/create/collage/">This tool is helpful in making collages.</a></small>
-
         <br>
+
         <%= label_tag :hero_alt, 'Hero image ALT text:' %>
         <%= text_field_tag :hero_alt %>
         <small>This will be read by blind recipients and will also be displayed if the image can't load.</small>
+        <br>
+
+        <%= label_tag 'lead_html', 'Lead' %>
+        <br>
+        <%= text_area_tag 'lead_html', default_lead_html, rows: 5, cols: 80, class: 'richtext' %>
       </section>
     </div>
 

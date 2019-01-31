@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ally Newsletter Preview</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <style>
+      .email-code {
+        height: 120px;
+        overflow-y: auto;
+        -webkit-user-select: all;
+        -moz-user-select: all;
+        user-select: all;
+      }
+
+    </style>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"><%# Required for responsive layout %>
+  </head>
+
+  <body>
+    <pre class="email-code"><code><%= @newsletter_html %></code></pre>
+
+    <div><%= @newsletter_html.html_safe %></div></div>
+  </body>
+</html>
+

@@ -36,7 +36,10 @@ class NewslettersController < ApplicationController
       with_html_string: true,
       css_string: email_css, # TODO check if this is the best way
     )
-    render html: premailer.to_inline_css.html_safe
+
+    @newsletter_html = premailer.to_inline_css
+
+    render layout: false # Don't include extra CSS that might mess up the email (until all:revert works)
   end
 
   def format_location(event)

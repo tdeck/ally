@@ -11,9 +11,10 @@ class SessionsController < ApplicationController
     uid = auth.uid
     raise 'Wrong uid type' unless uid.is_a?(Integer)
 
-    unless Rails.application.config.admin_ids.include?(uid)
-      # TODO show a proper error page
-      raise 'This meetup user is not authorized to use Ally. Contact the Ally administrator for access.'
+    email = MeetupClient.new(auth.credentials['token']).get_user_email
+
+    unless Rails.application.config.admin_emails.include?(email.downcase)
+      return redirect_to '/', alert: "This meetup user #{email} is not authorized to use Ally. Contact the Ally administrator for access."
     end
 
     session['uid'] = uid
@@ -27,7 +28,7 @@ class SessionsController < ApplicationController
 
   def destroy
     reset_session
-    redirect_to action: :new
+    redirect_to '/'
   end
 
   # TODO logout action

@@ -17,9 +17,10 @@ module Ally
     # the framework and any gems in your application.
 
     config.group_slug = 'sfhumanists'
-    config.admin_ids = [
-      10647539, # Jim Barnett
-      150060702, # Troy Deck
-    ]
+    config.admin_emails = %w(
+      troy.deque@gmail.com
+      jimwbarnett@mac.com
+      deborahmeckler@comcast.net
+    ).map(&:downcase)
   end
 end

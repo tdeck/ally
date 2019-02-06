@@ -3,7 +3,11 @@ class MeetupClient
     @oauth_token = oauth_token
   end
 
-  def list_managed_groups(uid)
+  def get_user_email
+    get_profile_info['email']
+  end
+
+  def get_profile_info
     res = RestClient.get(
       "https://api.meetup.com/members/self",
       Authorization: "Bearer #{@oauth_token}",
@@ -13,7 +17,11 @@ class MeetupClient
       accept: :json,
     )
 
-    JSON.parse(res.body)['memberships']['organizer']
+    JSON.parse(res.body).with_indifferent_access
+  end
+
+  def list_managed_groups
+    get_profile_info['memberships']['organizer']
       .map { |g| g['group'].with_indifferent_access }
   end
 

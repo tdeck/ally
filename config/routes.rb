@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   get '/', :to => 'home#index'
 
-  resources :events, only: [:index, :show]
-  resources :cross_posts, only: [:new, :create]
+  resources :events, only: [:index, :show] do
+    resources :cross_posts, only: [:new, :create]
+  end
 
   resources :named_users, only: [:create]
 

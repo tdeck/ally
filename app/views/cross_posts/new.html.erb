@@ -1,10 +1,9 @@
 <h1>Cross-post event <%= @event_id %></h1>
 
 <h2>Copy event automatically</h2>
-<%= form_tag(cross_posts_path) do %>
+<%= form_tag(event_cross_posts_path(event_id: @event_id)) do %>
   <%= hidden_field_tag :task, 'generate' %>
   <%= hidden_field_tag :source_group, @source_group %>
-  <%= hidden_field_tag :event_id, @event_id %>
 
   <%= label_tag :dest_group, 'Destination group:' %>
   <%= select_tag :dest_group, options_for_select(@other_groups.map { |g| g.values_at(:name, :urlname) }) %>
@@ -21,10 +20,9 @@
 Use this if you've already copied an event manually and you want to associate 
 them to group and manage RSVPs.
 
-<%= form_tag(cross_posts_path) do %>
+<%= form_tag(event_cross_posts_path(event_id: @event_id)) do %>
   <%= hidden_field_tag :task, 'record' %>
   <%= hidden_field_tag :source_group, @source_group %>
-  <%= hidden_field_tag :event_id, @event_id %>
 
   <%= label_tag :copy_event_id, 'Event ID of the copy:' %>
   <%= text_field_tag :copy_event_id %>

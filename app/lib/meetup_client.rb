@@ -26,12 +26,17 @@ class MeetupClient
   end
 
   def list_upcoming_events(group, count)
+    list_events(group, page: count, scroll: 'next_upcoming')
+  end
+
+  def list_recent_past_events(group, count)
+    list_events(group, page: count, scroll: 'recent_past', desc: true)
+  end
+
+  def list_events(group, **params)
     res = RestClient.get(
       "https://api.meetup.com/#{group}/events",
-      params: {
-        page: count,
-        scroll: 'next_upcoming',
-      },
+      params: params,
       Authorization: "Bearer #{@oauth_token}",
       accept: :json,
     )

@@ -2,7 +2,8 @@ class EventsController < ApplicationController
   NUM_EVENTS = 10
 
   def index
-    @events = meetup_client.list_upcoming_events(group_slug, NUM_EVENTS)
+    @upcoming_events = meetup_client.list_upcoming_events(group_slug, NUM_EVENTS)
+    @recent_events = meetup_client.list_recent_past_events(group_slug, NUM_EVENTS)
   end
 
   def show

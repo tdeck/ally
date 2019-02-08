@@ -66,3 +66,7 @@ Meetup link: <a href="<%= @event[:link] %>"><%= @event[:link] %></a>
   <br>
   * These attendees did not provide a full name, and we weren't able to reach them before this list was compiled.
 </div>
+
+<h2>Copyable Question Answers</h2>
+<small>Click on the list below to select all</small>
+<pre class="select-all"><%= @question_answers.join("\n") %></pre>

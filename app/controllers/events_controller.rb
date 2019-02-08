@@ -41,5 +41,7 @@ class EventsController < ApplicationController
     end.sort { |p, q| p[:name].casecmp(q[:name]) }
 
     @rsvp_count = @rsvps.count + @rsvps.map {|r| r[:plus] }.sum
+
+    @question_answers = raw_rsvps.map { |r| r.dig(:answers, 0, :answer) }.compact.uniq
   end
 end

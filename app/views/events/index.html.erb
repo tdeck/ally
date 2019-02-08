@@ -1,10 +1,11 @@
-<h1>Meetup Events</h1>
 <ul>
   <li><%= link_to 'New newsletter', new_newsletter_path %></li>
   <li><%= link_to 'Log out', '/logout' %></li>
 </ul>
 
-<h1>Upcoming</h1>
+<h1>Meetup Events</h1>
+
+<h2>Upcoming</h2>
 <table>
   <tbody>
     <% @upcoming_events.each do |event| %>
@@ -20,7 +21,7 @@
   </tbody>
 </table>
 
-<h1>Recent</h1>
+<h2>Recent</h2>
 <table>
   <tbody>
     <% @recent_events.each do |event| %>

@@ -1,0 +1,16 @@
+<nav>
+  <a href="#" class="brand">
+    <%= image_tag("logo.svg", class: 'logo') %>
+    <span>BAH Ally</span>
+  </a>
+
+  <!-- responsive-->
+  <input id="bmenub" type="checkbox" class="show">
+  <label for="bmenub" class="burger pseudo button">menu</label>
+
+  <div class="menu">
+    <%= link_to 'Meetup events', events_path, class: 'pseudo button' %>
+    <%= link_to 'New newsletter', new_newsletter_path, class: 'pseudo button' %>
+    <%= link_to 'Log out', '/logout', class: 'pseudo button' %>
+  </div>
+</nav>

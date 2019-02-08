@@ -13,7 +13,6 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
     <meta name="viewport" content="width=device-width, initial-scale=1"><%# Required for responsive layout %>
-
   </head>
 
   <body>
@@ -22,6 +21,10 @@
     <% end %>
     <% if notice.present? %>
       <div class="flashbar label success"><%= flash[:notice] %></div>
+    <% end %>
+
+    <% if valid_session? %>
+      <%= render 'layouts/nav' %>
     <% end %>
 
     <main>

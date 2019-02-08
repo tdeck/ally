@@ -14,6 +14,10 @@
  *= require_self
  */
 
+body {
+  margin-top: 3em; /* Keep navbar off of content */
+}
+
 main {
   max-width: 690px;
   margin-left: auto;

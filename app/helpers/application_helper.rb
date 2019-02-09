@@ -27,4 +27,29 @@ module ApplicationHelper
     end
     raw doc
   end
+
+  # Returns the appropriate logo for dev or prod
+  def svg_logo
+    if Rails.env.production?
+      'logo.svg'
+    else
+      'dev-logo.svg'
+    end
+  end
+
+  def favicon_16_path
+    if Rails.env.production?
+      '/favicon-16x16.png'
+    else
+      '/favicon-16x16-dev.png'
+    end
+  end
+
+  def favicon_32_path
+    if Rails.env.production?
+      '/favicon-32x32.png'
+    else
+      '/favicon-32x32-dev.png'
+    end
+  end
 end

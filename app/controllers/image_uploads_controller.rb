@@ -16,7 +16,7 @@ class ImageUploadsController < ApplicationController
 
     unless @record
       @record = ImageUpload.create!(
-        title: params.require(:title),
+        title: params.permit(:title),
         mime_type: image.content_type,
         bytes: image_bytes,
         sha1: sha1,
@@ -26,6 +26,10 @@ class ImageUploadsController < ApplicationController
 
     respond_to do |format|
       format.html # Render view
+      format.js do
+        @url_field_selector = params.require(:url_field_selector)
+        # Render create.js.erb
+      end
       format.json do
         render json: {url: url_for(@record)}
       end

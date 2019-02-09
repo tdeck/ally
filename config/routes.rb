@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   resources :newsletters, only: [:new, :create]
   resources :non_meetup_events, only: [:new, :create]
+  resources :image_uploads
 
   # OAuth routes
   get '/login', :to => 'sessions#new', :as => :login

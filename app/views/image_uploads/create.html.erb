@@ -1,0 +1,10 @@
+<h1>Image uploaded</h1>
+
+<article class="card">
+  <img src="<%= image_upload_path(@record) %>">
+  <footer>
+    <h3><%= @record.title %></h3>
+  </footer>
+</article>
+
+<%= link_to image_upload_url(@record), @record %>

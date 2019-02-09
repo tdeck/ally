@@ -8,7 +8,6 @@ document.addEventListener('turbolinks:load', function() {
     // CORS headers that would permit the SVG file to be loaded on localhost.
     svgPath: '/trumbowyg.svg',
     btns: [
-      ['viewHTML'],
       ['undo', 'redo'], // Only supported in Blink browsers
       ['formatting'],
       ['strong', 'em', 'del'],
@@ -17,6 +16,7 @@ document.addEventListener('turbolinks:load', function() {
       ['unorderedList', 'orderedList'],
       ['horizontalRule'],
       ['removeformat'],
+      ['viewHTML'],
       ['fullscreen'],
     ],
     resetCss: true

@@ -40,3 +40,8 @@ textarea.richtext {
 .trumbowyg-box, .trumbowyg-editor, .trumbowyg-textarea {
 	min-height: 180px !important;
 }
+
+.trumbowyg-box svg {
+ /* Fix picnic override that breaks this one SVG. I assume because it explicitly uses currentColor. */
+  color: #222 !important;
+}

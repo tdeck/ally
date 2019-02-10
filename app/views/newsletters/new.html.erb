@@ -61,5 +61,20 @@
     </div>
   <% end %>
 
-  <%= submit_tag 'Submit' %>
+  <% (1..NewslettersHelper::MAX_ARTICLES).each do |i| %>
+    <div class="card">
+      <header>Article <%= i %> (optional)</header>
+      <section>
+        <%= label_tag 'articles[][title]', 'Title' %>
+        <%= text_field_tag 'articles[][title]', '' %>
+        <small>Leave this blank if you don't want this article</small>
+        <br>
+        <%= label_tag 'articles[][copy_html]', 'Copy' %>
+        <br>
+        <%= text_area_tag 'articles[][copy_html]', '', rows: 10, cols: 80, class: 'richtext' %>
+      </section>
+    </div>
+  <% end %>
+
+  <%= submit_tag 'Preview' %>
 <% end # form %>

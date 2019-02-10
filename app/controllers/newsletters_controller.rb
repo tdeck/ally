@@ -35,6 +35,7 @@ class NewslettersController < ApplicationController
       lead_html: params.require(:lead_html),
       our_events: params.require(:events).select { |e| sections[e[:id]] == 'ours' }.map(&:permit!),
       other_events: params.require(:events).select { |e| sections[e[:id]] == 'others' }.map(&:permit!),
+      articles: params.require(:articles).select { |a| a[:title].present? }.map(&:permit!),
     }
 
     premailer = Premailer.new(

@@ -17,7 +17,7 @@
 //= require turbolinks
 //= require_tree .
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("turbolinks:load", function() {
   [].forEach.call(document.querySelectorAll('.dropimage'), function(img){
     img.onchange = function(e){
       var inputfile = this, reader = new FileReader();

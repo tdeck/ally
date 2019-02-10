@@ -93,7 +93,7 @@
       <!-- ENDEVENT -->
       {{/our_events}}
 
-      {{#other_events.length}} {{! Show this heading only if there is at least one such event }}
+      {{#has_other_events}} {{! Show this heading only if there is at least one such event }}
       <div class="content"><table bgcolor="">
         <tr>
           <td>
@@ -101,7 +101,7 @@
           </td>
         </tr>
       </table></div><!-- /content -->
-      {{/other_events.length}}
+      {{/has_other_events}}
 
       {{#other_events}}
       <!-- EVENT -->

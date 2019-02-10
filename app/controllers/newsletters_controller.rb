@@ -28,13 +28,16 @@ class NewslettersController < ApplicationController
       title: params.require(:hero_alt)
     )
 
+    other_events = params.require(:events).select { |e| sections[e[:id]] == 'others' }.map(&:permit!)
+
     template_params = {
       main_title: params.require(:main_title),
       hero_url: image_upload_url(hero_image_upload),
       hero_alt: params.require(:hero_alt),
       lead_html: params.require(:lead_html),
       our_events: params.require(:events).select { |e| sections[e[:id]] == 'ours' }.map(&:permit!),
-      other_events: params.require(:events).select { |e| sections[e[:id]] == 'others' }.map(&:permit!),
+      other_events: other_events,
+      has_other_events: other_events.any?,
       articles: params.require(:articles).select { |a| a[:title].present? }.map(&:permit!),
     }
 

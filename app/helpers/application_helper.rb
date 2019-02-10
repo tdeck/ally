@@ -52,4 +52,22 @@ module ApplicationHelper
       '/favicon-32x32-dev.png'
     end
   end
+
+  def store_image_upload(image, title: null)
+    image_bytes = image.read
+    sha1 = Digest::SHA1.hexdigest(image_bytes)
+
+    # If we already have the image, don't create another record
+    # Note: There's an unlikely race here
+    upload = ImageUpload.find_by_sha1(sha1)
+    return upload unless upload.nil?
+
+    return ImageUpload.create!(
+      title: params.permit(:title),
+      mime_type: image.content_type,
+      bytes: image_bytes,
+      sha1: sha1,
+      creator_uid: session['uid']
+    )
+  end
 end

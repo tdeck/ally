@@ -26,10 +26,6 @@ class ImageUploadsController < ApplicationController
 
     respond_to do |format|
       format.html # Render view
-      format.js do
-        @url_field_selector = params.require(:url_field_selector)
-        # Render create.js.erb
-      end
       format.json do
         render json: {url: url_for(@record)}
       end

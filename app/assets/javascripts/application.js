@@ -16,3 +16,16 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+// Support Picnic-style image uploads
+document.addEventListener("turbolinks:load", function() {
+  [].forEach.call(document.querySelectorAll('.dropimage'), function(img){
+    img.onchange = function(e){
+      var inputfile = this, reader = new FileReader();
+      reader.onloadend = function(){
+        inputfile.style['background-image'] = 'url('+reader.result+')';
+      }
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  });
+});

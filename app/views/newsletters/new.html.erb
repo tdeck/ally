@@ -1,30 +1,23 @@
 <h1>New Newsletter</h1>
-
-<!-- Fields appear outside the form tag -->
-<%= form_tag(image_uploads_path, id: 'image-upload', remote: true, multipart: true) %>
-
-<%= form_tag(newsletters_path) do %>
+<%= form_tag(newsletters_path, multipart: true) do %>
   <div class="card">
     <header>Intro content</header>
     <section>
       <%= label_tag :main_title, 'Newsletter title:' %>
-      <%= text_field_tag :main_title %>
+      <%= text_field_tag :main_title, '', required: true %>
       <br>
 
-      <%= label_tag :hero_url, 'Hero image URL:' %>
-      <%= text_field_tag :hero_url %>
-
-      <%# Begin ajax form %>
-      Or upload an image: <%= file_field_tag :image, form: 'image-upload' %> 
-      <%= hidden_field_tag 'url_field_selector', '#hero_url', form: 'image-upload' %>
-      <%= submit_tag 'Upload', form: 'image-upload' %>
-      <%# End ajax form %>
-
+      <label for="hero-image">Lead image</label>
+      <div style="heroimage">
+        <label class="dropimage">
+          <input name="hero_image" title="Drop image or click me" type="file" required>
+        </label>
+      </div>
       <small>Size should be 600x300. <a href="https://www.befunky.com/create/collage/">This tool is helpful in making collages.</a></small>
       <br>
 
-      <%= label_tag :hero_alt, 'Hero image ALT text:' %>
-      <%= text_field_tag :hero_alt %>
+      <%= label_tag :hero_alt, 'Lead image ALT text:' %>
+      <%= text_field_tag :hero_alt, '', required: true %>
       <small>This will be read by blind recipients and will also be displayed if the image can't load.</small>
       <br>
 

@@ -23,9 +23,14 @@ class NewslettersController < ApplicationController
   def create
     sections = params.require(:sections)[0] # id -> section # TODO understand what [0] does
 
+    hero_image_upload = store_image_upload(
+      params.require(:hero_image),
+      title: params.require(:hero_alt)
+    )
+
     template_params = {
       main_title: params.require(:main_title),
-      hero_url: params.require(:hero_url),
+      hero_url: image_upload_url(hero_image_upload),
       hero_alt: params.require(:hero_alt),
       lead_html: params.require(:lead_html),
       our_events: params.require(:events).select { |e| sections[e[:id]] == 'ours' }.map(&:permit!),

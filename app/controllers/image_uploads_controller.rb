@@ -34,7 +34,10 @@ class ImageUploadsController < ApplicationController
 
   def show
     record = ImageUpload.find_by_sha1!(params[:id])
-    send_data record.bytes, type: record.mime_type, disposition: :inline
+
+    if stale?(record)
+      send_data record.bytes, type: record.mime_type, disposition: :inline
+    end
   end
 
 end

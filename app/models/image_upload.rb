@@ -17,6 +17,11 @@
 #
 
 class ImageUpload < ApplicationRecord
+  # This model stores image uploads in the database. Performance-wise that's
+  # not the best choice, but it means there's one thing that needs to be
+  # backed up or moved if we change hosts, and for this kind of deployment
+  # that simplicity is valuable. Currently our traffic demands are not
+  # at all significant.
 
   def to_param
     sha1

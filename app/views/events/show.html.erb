@@ -2,12 +2,26 @@
 
 Meetup link: <a href="<%= @event[:link] %>"><%= @event[:link] %></a>
 
-<h2>Cross-posts</h2>
-<ul>
-  <% @cross_posts.each do |post| %>
-    <li><a href="<%= post.post_link %>"><%= post.post_link %></a></li>
-  <% end %>
-</ul>
+<section>
+  <h2>Cross-posts</h2>
+  <ul>
+    <% @cross_posts.each do |post| %>
+      <li><a href="<%= post.post_link %>"><%= post.post_link %></a></li>
+    <% end %>
+  </ul>
+
+  <div class="flex one three-600">
+    <div></div><!-- Placeholder -->
+    <div></div><!-- Placeholder -->
+    <%= link_to 'Cross post',
+      {
+        controller: 'cross_posts',
+        action: 'new',
+        event_id: @event[:id],
+      },
+      class: 'button' %>
+  </div>
+</section>
 
 <h2>RSVPs (<%= @rsvp_count %>)</h2>
 <table>

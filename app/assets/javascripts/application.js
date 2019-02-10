@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", function() {
         inputfile.style['background-image'] = 'url('+reader.result+')';
       }
       reader.readAsDataURL(e.target.files[0]);
-      console.log("FIle after upload:", e.target.files[0]);
     }
   });
 

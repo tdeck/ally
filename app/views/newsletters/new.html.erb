@@ -29,6 +29,7 @@
 
   <% @templated_events.each_with_index do |event, i| %>
     <div class="card">
+      <header>Meetup event: <em><%= event[:title] %></em></header>
       <section>
         <%# This uses a strange array feature of forms in Rails %>
 

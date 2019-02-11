@@ -33,6 +33,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'mysql2'
 gem 'discard', '~>1.0' # Soft deletes
+gem 'paper_trail'
 
 gem 'rest-client'
 

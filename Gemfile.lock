@@ -167,6 +167,9 @@ GEM
     omniauth-oauth2 (1.5.0)
       oauth2 (~> 1.1)
       omniauth (~> 1.2)
+    paper_trail (10.2.0)
+      activerecord (>= 4.2, < 6.1)
+      request_store (~> 1.1)
     premailer (1.11.1)
       addressable
       css_parser (>= 1.6.0)
@@ -204,6 +207,8 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
+    request_store (1.4.1)
+      rack (>= 1.4)
     rest-client (2.0.2)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
@@ -286,6 +291,7 @@ DEPENDENCIES
   mustache
   mysql2
   omniauth-meetup
+  paper_trail
   premailer
   puma (~> 3.11)
   rails (~> 5.2.0)

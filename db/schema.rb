@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_11_024353) do
+ActiveRecord::Schema.define(version: 2019_02_11_042447) do
 
   create_table "cross_posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "source_meetup"
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 2019_02_11_024353) do
 
   create_table "settings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "key"
-    t.string "value"
+    t.text "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["key"], name: "index_settings_on_key", unique: true

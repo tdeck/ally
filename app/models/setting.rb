@@ -4,7 +4,7 @@
 #
 #  id         :bigint(8)        not null, primary key
 #  key        :string(255)
-#  value      :string(255)
+#  value      :text(65535)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -14,8 +14,6 @@
 #
 
 class Setting < ApplicationRecord
-  NEWSLETTER_LEAD_HTML = 'newsletter_lead'
-
   has_paper_trail
 
   # These class methods are the API you should be using
@@ -24,7 +22,7 @@ class Setting < ApplicationRecord
       find_by_key(key)&.value
     end
 
-    def set_str(key, value)
+    def set_str!(key, value)
       s = find_or_initialize_by(key: key)
       s.value = value
       s.save!

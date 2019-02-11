@@ -11,6 +11,12 @@ Rails.application.routes.draw do
   resources :non_meetup_events, only: [:new, :create]
   resources :image_uploads
 
+  resources :settings, only: [:index] do
+    collection do
+      patch '' => 'settings#update_all'
+    end
+  end
+
   # OAuth routes
   get '/login', :to => 'sessions#new', :as => :login
   get '/logout', :to => 'sessions#destroy', :as => :logout

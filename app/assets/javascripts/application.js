@@ -17,6 +17,7 @@
 //= require turbolinks
 //= require_tree .
 
+// Set up picnic CSS image upload widget
 document.addEventListener("turbolinks:load", function() {
   [].forEach.call(document.querySelectorAll('.dropimage'), function(img){
     img.onchange = function(e){
@@ -35,5 +36,27 @@ document.addEventListener("turbolinks:load", function() {
     if (input.files.length > 0) {
       input.dispatchEvent(new Event('change', {bubbles: true}));
     }
+  });
+});
+
+// Set up Trumbowyg WYSIWYG editor
+document.addEventListener('turbolinks:load', function() {
+  $('.richtext').trumbowyg({
+    // I have to vendor this file because CloudFlare's CDN refuses to set broad
+    // CORS headers that would permit the SVG file to be loaded on localhost.
+    svgPath: '/trumbowyg.svg',
+    btns: [
+      ['undo', 'redo'], // Only supported in Blink browsers
+      ['formatting'],
+      ['strong', 'em', 'del'],
+      ['link'],
+      // ['insertImage'],
+      ['unorderedList', 'orderedList'],
+      ['horizontalRule'],
+      ['removeformat'],
+      ['viewHTML'],
+      ['fullscreen'],
+    ],
+    resetCss: true
   });
 });

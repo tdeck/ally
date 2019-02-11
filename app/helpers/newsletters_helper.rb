@@ -3,6 +3,6 @@ module NewslettersHelper
   MAX_ARTICLES = 3
 
   def default_lead_html
-    @default_lead ||= File.read(File.join(Rails.root, 'data', 'newsletter_default_lead.html'))
+    Setting.get_str(SettingsKeys::NEWSLETTER_LEAD_HTML)
   end
 end

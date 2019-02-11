@@ -13,4 +13,8 @@ class SettingsController < ApplicationController
 
     redirect_to settings_path
   end
+
+  def show
+    @setting = Setting.find_by_key(params[:id])
+  end
 end

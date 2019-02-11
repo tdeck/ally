@@ -6,6 +6,7 @@ These settings affect all users on the system.
   <fieldset>
     <h3>Newsletter</h3>
     <%= form.label SettingsKeys::NEWSLETTER_LEAD_HTML, 'Default lead copy:' %>
+    <%= link_to '(see past values)', setting_path(SettingsKeys::NEWSLETTER_LEAD_HTML) %>
     <br>
     <%= form.text_area SettingsKeys::NEWSLETTER_LEAD_HTML, value: @newsletter_lead_html, rows: 5, cols: 80, class: 'richtext' %>
   </fieldset>

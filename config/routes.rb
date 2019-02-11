@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :non_meetup_events, only: [:new, :create]
   resources :image_uploads
 
-  resources :settings, only: [:index] do
+  resources :settings, only: [:index, :show] do
     collection do
       patch '' => 'settings#update_all'
     end

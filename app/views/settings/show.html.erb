@@ -1,0 +1,42 @@
+<h1>Setting history</h1>
+
+<p>
+  Setting: <code><%= @setting.key %></code>
+
+  <h2>Past versions</h2>
+  <p>
+  This table shows past contents of this setting and who edited it. 
+  Click on a user ID to view that user's Meetup profile.
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Timestamp</th>
+        <th>Author</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @setting.versions.reverse.each do |version| %>
+        <tr>
+          <td>
+            <%= version.created_at %>
+          </td>
+          <td>
+            <% if version.whodunnit.present? %>
+              <%= meetup_profile_link(version.whodunnit) %>
+            <% end %>
+          </td>
+          <td>
+            <% if version.object.nil? %>
+              <em>NONE</em>
+            <% else %>
+              <%# Note that version.object is the version *before* this change! %>
+              <code><%= version.reify.paper_trail.next_version.value %></code>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</p>

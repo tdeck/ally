@@ -29,7 +29,8 @@
           </td>
           <td>
             <% if version.object.nil? %>
-              <em>NONE</em>
+              <%# This is the first ever version %>
+              <code><%= version.next.reify.value %></code>
             <% else %>
               <%# Note that version.object is the version *before* this change! %>
               <code><%= version.reify.paper_trail.next_version.value %></code>

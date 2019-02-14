@@ -21,6 +21,7 @@ module Ally
       troy.deque@gmail.com
       jimwbarnett@mac.com
       deborahmeckler@comcast.net
+      ally-robot@sfhumanists.org
     ).map(&:downcase)
   end
 end

@@ -18,6 +18,7 @@ class SessionsController < ApplicationController
     end
 
     session['uid'] = uid
+    session['email'] = email
     session['credentials'] = auth.credentials
 
     redirect_to controller: 'events', action: 'index'

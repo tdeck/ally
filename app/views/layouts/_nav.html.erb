@@ -1,14 +1,17 @@
 <nav>
-  <a href="#" class="brand">
+  <span class="brand">
     <%= image_tag(svg_logo, class: 'logo') %>
     <span>BAH Ally</span>
-  </a>
+  </span>
 
   <!-- responsive-->
   <input id="bmenub" type="checkbox" class="show">
   <label for="bmenub" class="burger pseudo button">menu</label>
 
   <div class="menu">
+    <% if user_email.present? %>
+      <span class="pseudo label" >Signed in as <%= user_email %></span>
+    <% end %>
     <%= link_to 'Meetup events', events_path, class: 'pseudo button' %>
     <%= link_to 'New newsletter', new_newsletter_path, class: 'pseudo button' %>
     <%= link_to 'Settings', settings_path, class: 'pseudo button' %>

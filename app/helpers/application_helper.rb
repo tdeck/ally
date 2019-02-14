@@ -17,6 +17,10 @@ module ApplicationHelper
     @meetup_client ||= MeetupClient.new(oauth_token)
   end
 
+  def user_email
+    session['email']
+  end
+
   def embed_svg(filename, options = {})
     assets = Rails.application.assets
     file = assets.find_asset(filename).source.force_encoding("UTF-8")

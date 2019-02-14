@@ -45,6 +45,8 @@ class MeetupClient
   end
 
   def list_rsvps(group, event_id)
+    # FYI: This will return 200 for draft events that the OAuth user does not
+    # have access to
     res = RestClient.get(
       "https://api.meetup.com/#{group}/events/#{event_id}/rsvps",
       params: {

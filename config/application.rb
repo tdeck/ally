@@ -17,11 +17,16 @@ module Ally
     # the framework and any gems in your application.
 
     config.group_slug = 'sfhumanists'
-    config.admin_emails = %w(
-      troy.deque@gmail.com
-      jimwbarnett@mac.com
-      deborahmeckler@comcast.net
-      ally-robot@sfhumanists.org
-    ).map(&:downcase)
+
+    def email_concat(user, host)
+      "#{user}@#{host}".downcase
+    end
+
+    config.admin_emails = [ # Separated to defeat spam
+      email_concat('troy.deque', 'gmail.com'),
+      email_concat('jimwbarnett', 'mac.com'),
+      email_concat('debmeckler', 'gmail.com'),
+    ]
   end
+
 end

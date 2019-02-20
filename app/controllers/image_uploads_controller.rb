@@ -27,7 +27,7 @@ class ImageUploadsController < ApplicationController
     respond_to do |format|
       format.html # Render view
       format.json do
-        render json: {url: url_for(@record)}
+        render json: {url: url_for(@record), success: true}
       end
     end
   end

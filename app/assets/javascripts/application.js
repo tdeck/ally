@@ -11,8 +11,8 @@
 // about supported directives.
 //
 //
-//= require rails-ujs
 //= require jquery3
+//= require jquery_ujs
 //= require activestorage
 //= require turbolinks
 //= require_tree .
@@ -50,15 +50,35 @@ document.addEventListener('turbolinks:load', function() {
       ['formatting'],
       ['strong', 'em', 'del'],
       ['link'],
-      ['insertImage'],
+      ['image'],
       ['unorderedList', 'orderedList'],
       ['horizontalRule'],
       ['removeformat'],
       ['viewHTML'],
       ['fullscreen'],
     ],
+    btnsDef: {
+      // I think the "Upload" image is confusing and not what someone would
+      // likely click; this is the best I can do without a lot of effort.
+      // Leaving the URL option in (called 'Insert Image") will probably be
+      // confusing also as the text implies it'll be the best choice but
+      // in most cases will not be.
+      image: {
+        dropdown: ['upload'],
+        ico: 'insertImage'
+      }
+    },
     resetCss: true,
     minimalLinks: true, // Don't show title and target fields
     removeformatPasted: true,
+
+    plugins: {
+      upload: {
+        serverPath: '/image_uploads',
+        fileFieldName: 'image',
+        urlPropertyName: 'url',
+        //imageWidthModalEdit: true,
+      }
+    }
   });
 });

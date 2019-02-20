@@ -50,13 +50,15 @@ document.addEventListener('turbolinks:load', function() {
       ['formatting'],
       ['strong', 'em', 'del'],
       ['link'],
-      // ['insertImage'],
+      ['insertImage'],
       ['unorderedList', 'orderedList'],
       ['horizontalRule'],
       ['removeformat'],
       ['viewHTML'],
       ['fullscreen'],
     ],
-    resetCss: true
+    resetCss: true,
+    minimalLinks: true, // Don't show title and target fields
+    removeformatPasted: true,
   });
 });

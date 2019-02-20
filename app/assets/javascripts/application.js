@@ -77,7 +77,6 @@ document.addEventListener('turbolinks:load', function() {
         serverPath: '/image_uploads',
         fileFieldName: 'image',
         urlPropertyName: 'url',
-        //imageWidthModalEdit: true,
       }
     }
   });

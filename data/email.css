@@ -62,13 +62,33 @@ table.social {
 	display:block;
 	text-align:center;
 }
+
+.footer-btn {
+    padding: 3px 7px;
+    font-size:16px;
+    margin-bottom:10px;
+    text-decoration:none;
+    color: #FFF;
+    font-weight:bold;
+    display:block;
+    text-align:center;
+}
+
+a.membership {
+    background-color: #0B4F6C!important;
+}
+
+a.chipin {
+    background-color: #2ECC40!important;
+}
+
 a.fb { background-color: #3B5998!important; }
 a.tw { background-color: #1daced!important; }
 a.gp { background-color: #DB4A39!important; }
 a.mu { background-color: #F64060!important; }
 a.ms { background-color: #000!important; }
 
-.sidebar .soc-btn { 
+.sidebar .soc-btn {
 	display:block;
 	width:100%;
 }

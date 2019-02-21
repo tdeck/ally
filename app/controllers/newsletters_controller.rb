@@ -44,6 +44,7 @@ class NewslettersController < ApplicationController
     premailer = Premailer.new(
       Mustache.render(email_template, template_params),
       with_html_string: true,
+      css_to_attributes: false,
       css_string: email_css, # TODO check if this is the best way
     )
 

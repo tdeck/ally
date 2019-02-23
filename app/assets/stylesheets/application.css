@@ -24,6 +24,15 @@ main {
   margin-right: auto;
 }
 
+footer {
+  padding-top: 24px;
+  padding-bottom: 24px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 75%;
+}
+
 div.flashbar {
   display: block;
   margin: 0 0 0 0;

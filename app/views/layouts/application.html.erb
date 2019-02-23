@@ -42,5 +42,9 @@
     <main>
       <%= yield %>
     </main>
+
+    <% if valid_session? %>
+      <%= render 'layouts/footer' %>
+    <% end %>
   </body>
 </html>

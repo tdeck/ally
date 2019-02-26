@@ -18,8 +18,8 @@ Rails.application.routes.draw do
   end
 
   # OAuth routes
-  get '/login', :to => 'sessions#new', :as => :login
+  get '/login', :to => redirect(path: '/auth/meetup'), :as => :login
   get '/logout', :to => 'sessions#destroy', :as => :logout
-  get '/auth/:provider/callback', :to => 'sessions#create' # TODO match?
-  get '/auth/failure', :to => 'sessions#failure' # TODO match?
+  get '/auth/:provider/callback', :to => 'sessions#create'
+  get '/auth/failure', :to => 'sessions#failure'
 end

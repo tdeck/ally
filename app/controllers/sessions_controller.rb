@@ -1,10 +1,6 @@
 class SessionsController < ApplicationController
   skip_before_action :require_session!
 
-  def new
-    redirect_to '/auth/meetup'
-  end
-
   def create
     auth = request.env['omniauth.auth']
 
@@ -21,7 +17,7 @@ class SessionsController < ApplicationController
     session['email'] = email
     session['credentials'] = auth.credentials
 
-    redirect_to controller: 'events', action: 'index'
+    redirect_to request.env['omniauth.origin'] || { controller: 'events', action: 'index' }
   end
 
   def failure
@@ -31,6 +27,4 @@ class SessionsController < ApplicationController
     reset_session
     redirect_to '/'
   end
-
-  # TODO logout action
 end

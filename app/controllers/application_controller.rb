@@ -6,7 +6,13 @@ class ApplicationController < ActionController::Base
 
   def require_session!
     unless valid_session?
-      redirect_to '/login'
+      if request.method_symbol == :get
+        redirect_to login_path(origin: request.fullpath)
+      else
+        redirect_to '/login', alert:
+          'Your session expired and had to be refreshed. '\
+          'Try the back button to get your submission back.'
+      end
     end
   end
 

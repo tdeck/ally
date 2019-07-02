@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   NUM_EVENTS = 10
+  CHAT_BASE_URL = 'https://secure.meetup.com/messages/'
 
   def index
     @upcoming_events = meetup_client.list_upcoming_events(group_slug, NUM_EVENTS)
@@ -32,12 +33,15 @@ class EventsController < ApplicationController
       uid = r[:member][:id]
       answer_string = r.dig(:answers, 0, :answer)
 
+      mu_name = r[:member][:name]
+
       {
         uid: uid,
-        name: r[:member][:name],
+        name: mu_name,
         answer: answer_string.present? ? answer_string : nil,
         verified_name: NamedUser.find_by_meetup_id(uid)&.full_name,
         plus: r[:guests],
+        chat_link: "#{CHAT_BASE_URL}?new_convo=true&member_id=#{uid}&name=#{CGI::escape(mu_name)}"
       }
     end.sort { |p, q| p[:name].casecmp(q[:name]) }
 

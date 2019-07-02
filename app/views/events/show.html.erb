@@ -36,6 +36,7 @@ Meetup link: <a href="<%= @event[:link] %>"><%= @event[:link] %></a>
     <% @rsvps.each do |rsvp| %>
       <tr>
         <td>
+          <a href="<%= rsvp[:chat_link] %>">💬</a>
           <%= rsvp[:name] %>
         </td>
         <td>

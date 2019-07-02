@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
 
     email = MeetupClient.new(auth.credentials['token']).get_user_email
 
-    unless Rails.application.config.admin_emails.include?(email.downcase)
+    unless admin_emails.include?(email.downcase)
       return redirect_to '/', alert: "This meetup user #{email} is not authorized to use Ally. Contact the Ally administrator for access."
     end
 
@@ -26,5 +26,10 @@ class SessionsController < ApplicationController
   def destroy
     reset_session
     redirect_to '/'
+  end
+
+  def admin_emails
+    Setting.get_str(SettingsKeys::ADMIN_EMAILS).strip.downcase.split(/\r?\n/) +
+      Rails.application.config.sysadmin_emails
   end
 end

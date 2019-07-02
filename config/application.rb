@@ -22,10 +22,8 @@ module Ally
       "#{user}@#{host}".downcase
     end
 
-    config.admin_emails = [ # Separated to defeat spam
+    config.sysadmin_emails = [ # Separated to defeat spam
       email_concat('troy.deque', 'gmail.com'),
-      email_concat('jimwbarnett', 'mac.com'),
-      email_concat('debmeckler', 'gmail.com'),
     ]
   end
 

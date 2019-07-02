@@ -2,14 +2,33 @@
 These settings affect all users on the system.
 
 <%= form_with(scope: :settings, url: {controller: 'settings', action: 'update_all'}, method: :patch) do |form| %>
+  <h2>Newsletter</h2>
+  <%= form.label SettingsKeys::NEWSLETTER_LEAD_HTML, 'Default lead copy:' %>
+  <%= link_to '(see past values)', setting_path(SettingsKeys::NEWSLETTER_LEAD_HTML) %>
+  <br>
+  <%= form.text_area SettingsKeys::NEWSLETTER_LEAD_HTML, value: @newsletter_lead_html, rows: 5, cols: 80, class: 'richtext' %>
 
-  <fieldset>
-    <h3>Newsletter</h3>
-    <%= form.label SettingsKeys::NEWSLETTER_LEAD_HTML, 'Default lead copy:' %>
-    <%= link_to '(see past values)', setting_path(SettingsKeys::NEWSLETTER_LEAD_HTML) %>
+  <%= form.submit 'Save this setting' %>
+<% end %>
+
+<%= form_with(scope: :settings, url: {controller: 'settings', action: 'update_all'}, method: :patch) do |form| %>
+  <h2>Administrators</h2>
+  <%= form.label SettingsKeys::ADMIN_EMAILS, 'Admin emails (one per line):' %>
+  <%= link_to '(see past values)', setting_path(SettingsKeys::ADMIN_EMAILS) %>
+  <br>
+  <%= form.text_area SettingsKeys::ADMIN_EMAILS, value: @admin_emails, rows: 5, cols: 80 %>
+  <small>
+    These emails must correspond to the email used on the board member's Meetup account in order
+    for that person to be able to log in.
+  </small>
+
+  <p>
+    The following emails have hard-coded access as a failsafe:
     <br>
-    <%= form.text_area SettingsKeys::NEWSLETTER_LEAD_HTML, value: @newsletter_lead_html, rows: 5, cols: 80, class: 'richtext' %>
-  </fieldset>
+    <code>
+      <%= @hardcoded_admin_emails.join(', ') %>
+    </code>
+  </p>
 
-  <%= form.submit 'Save All' %>
+  <%= form.submit 'Save this setting' %>
 <% end %>

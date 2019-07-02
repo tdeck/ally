@@ -1,6 +1,8 @@
 class SettingsController < ApplicationController
   def index
     @newsletter_lead_html = Setting.get_str(SettingsKeys::NEWSLETTER_LEAD_HTML)
+    @admin_emails = Setting.get_str(SettingsKeys::ADMIN_EMAILS)
+    @hardcoded_admin_emails = Rails.application.config.sysadmin_emails
   end
 
   def update_all

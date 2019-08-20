@@ -1,6 +1,9 @@
 class EventsController < ApplicationController
+  include BookgroupHelper
+
   NUM_EVENTS = 10
   CHAT_BASE_URL = 'https://secure.meetup.com/messages/'
+  BOOK_EMAIL_SUBJECT_TEMPLATE = 'Book Group {{{date_str}}}: {{{book_title}}}'
 
   def index
     @upcoming_events = meetup_client.list_upcoming_events(group_slug, NUM_EVENTS)
@@ -14,6 +17,9 @@ class EventsController < ApplicationController
       "https://api.meetup.com/#{group_slug}/events/#{id}",
       Authorization: "Bearer #{oauth_token}",
       accept: :json,
+      params: {
+        fields: 'plain_text_description',
+      },
     )
 
     @event = JSON.parse(res.body).with_indifferent_access
@@ -48,5 +54,16 @@ class EventsController < ApplicationController
     @rsvp_count = @rsvps.count + @rsvps.map {|r| r[:plus] }.sum
 
     @question_answers = raw_rsvps.map { |r| r.dig(:answers, 0, :answer) }.compact.uniq
+
+    if matches_bookgroup_pattern?(@event)
+      email_details = book_group_email_details(@event)
+
+      @book_email_subject = Mustache.render(BOOK_EMAIL_SUBJECT_TEMPLATE, email_details)
+      @book_email_html =  Mustache.render(book_email_template, email_details)
+    end
+  end
+
+  def book_email_template
+    @book_email_template ||= File.read(File.join(Rails.root, 'data', 'bookgroup_email.mustache'))
   end
 end

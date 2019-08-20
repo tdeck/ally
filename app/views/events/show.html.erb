@@ -82,6 +82,18 @@ Meetup link: <a href="<%= @event[:link] %>"><%= @event[:link] %></a>
   * These attendees did not provide a full name, and we weren't able to reach them before this list was compiled.
 </div>
 
+<% if @book_email_subject.present? %>
+  <h2>Book Group Email</h2>
+  <small>This looks like a book group post.</small>
+
+  <br>
+  <a href="mailto:?subject=<%= u @book_email_subject %>">Click here to start an email with the right subject.</a>
+
+  <br>
+  <small>Click the text below to select all</small>
+  <div class="select-all"><%=@book_email_html.html_safe %></div>
+<% end %>
+
 <h2>Copyable Question Answers</h2>
 <small>Click on the list below to select all</small>
 <pre class="select-all"><%= @question_answers.join("\n") %></pre>

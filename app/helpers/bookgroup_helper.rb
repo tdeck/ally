@@ -14,6 +14,7 @@ module BookgroupHelper
     m = event[:plain_text_description].match(ROOM_TITLE_AUTHOR_PATTERN)
     {
       book_title: m[:title],
+      short_title: m[:title].split(':').first, # A rough heuristic
       author: m[:author],
       room: m[:room],
       event_url: event[:link],

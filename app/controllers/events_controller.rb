@@ -3,7 +3,7 @@ class EventsController < ApplicationController
 
   NUM_EVENTS = 10
   CHAT_BASE_URL = 'https://secure.meetup.com/messages/'
-  BOOK_EMAIL_SUBJECT_TEMPLATE = 'Book Group {{{date_str}}}: {{{book_title}}}'
+  BOOK_EMAIL_SUBJECT_TEMPLATE = 'Book Group {{{date_str}}}: {{{short_title}}}'
 
   def index
     @upcoming_events = meetup_client.list_upcoming_events(group_slug, NUM_EVENTS)

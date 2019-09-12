@@ -91,7 +91,7 @@ Meetup link: <a href="<%= @event[:link] %>"><%= @event[:link] %></a>
   <div class="card">
     <header>
       Announcement email (select and copy)
-      <a href="mailto:?subject=<%= u @book_announcement_email_subject %>">Click here to populate subject in GMail</a>
+      <a href="mailto:?subject=<%= u @book_announcement_email_subject %>" target="_blank">Click here to populate subject in GMail</a>
     </header>
     <div class="email-body select-all"><%=@book_announcement_email_html.html_safe %></div>
   </div>
@@ -99,7 +99,7 @@ Meetup link: <a href="<%= @event[:link] %>"><%= @event[:link] %></a>
   <div class="card">
     <header>
       Reminder email (select and copy)
-      <a href="mailto:?subject=<%= u @book_reminder_email_subject %>">Click here to populate subject in GMail</a>
+      <a href="mailto:?subject=<%= u @book_reminder_email_subject %>" target="_blank">Click here to populate subject in GMail</a>
     </header>
     <div class="email-body select-all"><%=@book_reminder_email_html.html_safe %></div>
   </div>

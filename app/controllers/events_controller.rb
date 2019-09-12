@@ -3,7 +3,8 @@ class EventsController < ApplicationController
 
   NUM_EVENTS = 10
   CHAT_BASE_URL = 'https://secure.meetup.com/messages/'
-  BOOK_EMAIL_SUBJECT_TEMPLATE = 'Book Group {{{date_str}}}: {{{short_title}}}'
+  BOOK_ANNOUNCEMENT_EMAIL_SUBJECT_TEMPLATE = 'Book Group {{{date_str}}}: {{{short_title}}}'
+  BOOK_REMINDER_EMAIL_SUBJECT_TEMPLATE = 'Book Group this {{{weekday}}}'
 
   def index
     @upcoming_events = meetup_client.list_upcoming_events(group_slug, NUM_EVENTS)
@@ -58,12 +59,19 @@ class EventsController < ApplicationController
     if matches_bookgroup_pattern?(@event)
       email_details = book_group_email_details(@event)
 
-      @book_email_subject = Mustache.render(BOOK_EMAIL_SUBJECT_TEMPLATE, email_details)
-      @book_email_html =  Mustache.render(book_email_template, email_details)
+      @book_announcement_email_subject = Mustache.render(BOOK_ANNOUNCEMENT_EMAIL_SUBJECT_TEMPLATE, email_details)
+      @book_announcement_email_html =  Mustache.render(book_announcement_email_template, email_details)
+
+      @book_reminder_email_subject = Mustache.render(BOOK_REMINDER_EMAIL_SUBJECT_TEMPLATE, email_details)
+      @book_reminder_email_html =  Mustache.render(book_reminder_email_template, email_details)
     end
   end
 
-  def book_email_template
-    @book_email_template ||= File.read(File.join(Rails.root, 'data', 'bookgroup_email.mustache'))
+  def book_announcement_email_template
+    @book_announcement_email_template ||= File.read(File.join(Rails.root, 'data/bookgroup_emails/announcement.mustache'))
+  end
+
+  def book_reminder_email_template
+    @book_reminder_email_template ||= File.read(File.join(Rails.root, 'data/bookgroup_emails/reminder.mustache'))
   end
 end

@@ -82,7 +82,7 @@ Meetup link: <a href="<%= @event[:link] %>"><%= @event[:link] %></a>
   * These attendees did not provide a full name, and we weren't able to reach them before this list was compiled.
 </div>
 
-<% if @book_email_subject.present? %>
+<% if @book_announcement_email_subject.present? %>
   <h2>Book Group Emails</h2>
   <p>
     This looks like a book group post. Ally can generate announcement emails for you.
@@ -90,10 +90,18 @@ Meetup link: <a href="<%= @event[:link] %>"><%= @event[:link] %></a>
 
   <div class="card">
     <header>
-      Announcement email (click to select)
-      <a href="mailto:?subject=<%= u @book_email_subject %>">Click here to populate subject in GMail</a>
+      Announcement email (select and copy)
+      <a href="mailto:?subject=<%= u @book_announcement_email_subject %>">Click here to populate subject in GMail</a>
     </header>
-    <div class="email-body select-all"><%=@book_email_html.html_safe %></div>
+    <div class="email-body select-all"><%=@book_announcement_email_html.html_safe %></div>
+  </div>
+
+  <div class="card">
+    <header>
+      Reminder email (select and copy)
+      <a href="mailto:?subject=<%= u @book_reminder_email_subject %>">Click here to populate subject in GMail</a>
+    </header>
+    <div class="email-body select-all"><%=@book_reminder_email_html.html_safe %></div>
   </div>
 <% end %>
 

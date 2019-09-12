@@ -18,7 +18,8 @@ module BookgroupHelper
       author: m[:author],
       room: m[:room],
       event_url: event[:link],
-      date_str: time.strftime("%A, %B #{time.day.ordinalize}"),
+      weekday: time.strftime("%A"),
+      date_str: time.strftime("%B #{time.day.ordinalize}"),
       time_str: time.strftime('%l:%M %p'), # This has a left space but it's OK
     }
   end

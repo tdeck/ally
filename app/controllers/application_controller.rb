@@ -21,6 +21,16 @@ class ApplicationController < ActionController::Base
   end
 
   def populate_whodunnit
-    PaperTrail.request.whodunnit = session[:uid]
+    PaperTrail.request.whodunnit = session['uid']
+  end
+
+  # This is for Rollbar's benefit
+  def current_user
+    return nil unless valid_session?
+
+    OpenStruct.new(
+      id: session['uid'],
+      email: session['email']
+    )
   end
 end

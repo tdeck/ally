@@ -23,13 +23,12 @@ class EventsController < ApplicationController
       },
     )
 
-    @event = JSON.parse(res.body).with_indifferent_access
-    # TODO maybe weed out deleted ones
+    @event = meetup_client.get_event(group_slug, id)
 
     @cross_posts = CrossPost.where(
       source_meetup: @event[:group][:urlname],
       source_id: id,
-    )
+    ).map { |xp| CrossPostPresenter.new(xp, meetup_client) }
 
     raw_rsvps = (
       meetup_client.list_rsvps(group_slug, id) +
@@ -66,6 +65,8 @@ class EventsController < ApplicationController
       @book_reminder_email_html =  Mustache.render(book_reminder_email_template, email_details)
     end
   end
+
+private
 
   def book_announcement_email_template
     @book_announcement_email_template ||= File.read(File.join(Rails.root, 'data/bookgroup_emails/announcement.mustache'))

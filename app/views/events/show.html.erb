@@ -6,7 +6,12 @@ Meetup link: <a href="<%= @event[:link] %>"><%= @event[:link] %></a>
   <h2>Cross-posts</h2>
   <ul>
     <% @cross_posts.each do |post| %>
-      <li><a href="<%= post.post_link %>"><%= post.post_link %></a></li>
+      <% unless post.is_deleted? %>
+        <li>
+          <a href="<%= post.post_link %>"><%= post.post_link %></a>
+          <%= '(draft)' if post.is_draft? %>
+        </li>
+      <% end %>
     <% end %>
   </ul>
 

@@ -20,6 +20,19 @@ class MeetupClient
     JSON.parse(res.body).with_indifferent_access
   end
 
+  def get_event(group, id)
+    res = RestClient.get(
+      "https://api.meetup.com/#{group}/events/#{id}",
+      Authorization: "Bearer #{@oauth_token}",
+      accept: :json,
+      params: {
+        fields: 'plain_text_description',
+      },
+    )
+
+    JSON.parse(res.body).with_indifferent_access
+  end
+
   def list_managed_groups
     get_profile_info['memberships']['organizer']
       .map { |g| g['group'].with_indifferent_access }

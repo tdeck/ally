@@ -1,6 +1,8 @@
 <div style="font-family: sans-serif; font-size: 10pt">
+
 <p>
-Just sending my usual reminder about our book group meeting this {{weekday}}:
+Just sending my usual reminder about our book group meeting this {{weekday}}{{#has_unusual_location}}. Note the different location{{/has_unusual_location}}:
+
 </p>
 
 <p>
@@ -9,7 +11,10 @@ Book: {{book_title}}<br>
 Author: {{author}}<br>
 Date: {{weekday}}, {{date_str}}<br>
 Time: {{time_str}}<br>
-Location: {{room}}, Main library
+Location:
+    {{#has_unusual_location}}<span style="background-color: #FFEA66">{{/has_unusual_location}}
+        {{location}}
+    {{#has_unusual_location}}</span>{{/has_unusual_location}}
 </strong>
 </p>
 
@@ -18,7 +23,7 @@ Location: {{room}}, Main library
 </p>
 
 <p>
-    Hope to see you there! 
+    Hope to see you there!
 </p>
 <p>
 - Troy

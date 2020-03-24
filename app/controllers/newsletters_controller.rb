@@ -56,6 +56,7 @@ class NewslettersController < ApplicationController
   def format_location(event)
     venue = event[:venue]
     return '' if venue.nil?
+    return venue.fetch(:name, '') if not venue[:address_1]
     venue[:name] + ', ' + venue[:address_1] + (venue[:city] == 'San Francisco' ? '' : venue[:city])
   end
 

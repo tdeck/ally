@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>BAH Badge</title>
+<big>Use Chrome to print this</big>
+
+<style>
+  /* See clrs.cc for colors */
+
+  @media print{@page {size: portrait}}
+
+  .lanyard-badge-page {
+    max-width: 7.5in;
+    display: flex;
+    align-items: flex-start;
+    flex-flow: row wrap;
+  }
+
+  .lanyard-badge-outline {
+    font-family: lato;
+    width: 85mm;
+    height: 54mm;
+    border-width: 1px;
+    border-style: dashed;
+    border-color: #7FDBFF;
+    overflow: hidden;
+    margin: 2mm;
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+
+  .lanyard-badge-topBar {
+    height: 8mm;
+    background: #0074D9;
+    color: white;
+    font-size: 16pt;
+    font-weight: bold;
+    text-align: center;
+    line-height: 8mm; /* Vertically centers text */
+    padding-top: 4mm; /* This will be covered by top of holder */
+    margin-bottom: 2mm;
+    border-radius: 1mm;
+    text-transform: uppercase;
+  }
+
+  .lanyard-badge-inside {
+    margin-left: 2mm;
+    margin-right: 2mm;
+  }
+
+  .lanyard-badge-firstName {
+    text-align: center;
+    font-size: 32pt;
+    font-weight: bold;
+  }
+
+  .lanyard-badge-lastName {
+    text-align: center;
+    font-size: 24pt;
+  }
+
+  /* Add a zero-width space to the last name container. This won't affect the
+     centering but will ensure the layout remains correct if we have a person
+     with no surname, as is common in some cultures. */
+  .lanyard-badge-lastName:after {
+    content: "\200b";
+  }
+
+  .lanyard-badge-pronouns {
+    opacity: 0.6;
+    text-align: center;
+    font-size: 16pt;
+  }
+
+  .lanyard-badge-role {
+    margin-top: 2mm;
+    text-align: center;
+    height: 8mm;
+    font-size: 16pt;
+
+    line-height: 8mm; /* vertically center text */
+    color: white;
+    text-transform: uppercase;
+    border-radius: 1mm;
+  }
+
+  .lanyard-badge-role.board {
+    background: #0074D9;
+  }
+
+  .lanyard-badge-role.volunteer {
+    background: #2ECC40;
+  }
+
+  .lanyard-badge-role.speaker {
+    background: #85144b;
+  }
+
+  .lanyard-badge-role img {
+    height: 8mm;
+    vertical-align: middle;
+  }
+</style>
+
+<div class="lanyard-badge-page">
+  <% @badges.each do |badge| %>
+    <div class="lanyard-badge-outline">
+      <div class="lanyard-badge-inside">
+        <div class="lanyard-badge-topBar">
+          Bay Area Humanists
+        </div>
+        <div class="lanyard-badge-firstName">
+          <%= badge.first %>
+        </div>
+        <div class="lanyard-badge-lastName">
+          <%= badge.last %>
+        </div>
+        <div class="lanyard-badge-pronouns">
+          <%= badge.pronouns %>
+        </div>
+        <div class="lanyard-badge-role <%= badge.role.classname %>">
+          <!-- <img src="file:///usr/local/google/home/tdeck/Downloads/bah-logo.svg"> -->
+          <%= badge.role.name %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

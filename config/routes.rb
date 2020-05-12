@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'badge_printout/new'
+  get 'badge_printout/show'
   get '/', :to => 'home#index'
 
   resources :events, only: [:index, :show] do
@@ -10,6 +12,7 @@ Rails.application.routes.draw do
   resources :newsletters, only: [:new, :create]
   resources :non_meetup_events, only: [:new, :create]
   resources :image_uploads
+  resources :badge_printouts, only: [:new, :create]
 
   resources :settings, only: [:index, :show] do
     collection do

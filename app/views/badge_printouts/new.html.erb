@@ -1,0 +1,37 @@
+<h1>Print name badges</h1>
+<p>Use this to create consistently styled name badges that fit our lanyards.</p>
+<p><strong>Fill in as many rows as you need, then click generate.</strong></p>
+
+<%= form_tag(badge_printouts_path) do %>
+  <datalist id="pronouns">
+    <option>they/them</option>
+    <option>he/him</option>
+    <option>she/her</option>
+  </datalist>
+  <table class="badging">
+    <thead>
+      <tr>
+        <th>Given name</th>
+        <th>Surname (optional)</th>
+        <th>Pronouns<br>(select or write)</th>
+        <th>Badge type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% BadgePrintoutsHelper::MAX_BADGES.times do %>
+        <tr>
+          <td><input type="text" name="badges[][first]" placeholder="First"></td>
+          <td><input type="text" name="badges[][last]" placeholder="Last"></td>
+          <td><input type="text" name="badges[][pronouns]" list="pronouns" placeholder="pronouns"></td>
+          <td>
+            <select name="badges[][role]">
+              <% available_roles.each do |role| %>
+                <option><%= role.classname %></option>
+              <% end %>
+            </select>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= submit_tag 'Generate' %>
+<% end %>

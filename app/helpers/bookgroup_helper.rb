@@ -29,6 +29,7 @@ module BookgroupHelper
       book_title: m[:title],
       short_title: m[:title].split(':').first, # A rough heuristic
       author: m[:author],
+      online_event: event[:is_online_event],
       location: location,
       event_url: event[:link],
       weekday: time.strftime("%A"),

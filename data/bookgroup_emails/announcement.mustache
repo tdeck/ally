@@ -1,6 +1,12 @@
 <div style="font-family: sans-serif; font-size: 10pt">
 
-<p>Thanks to everyone who came out on Saturday for our recent book group. I've posted the next one <a href="{{{event_url}}}">here on meetup</a>. Please RSVP if you're planning on coming so we don't run out of seats. {{#has_unusual_location}}Note the different location!{{/has_unusual_location}}
+<p>Thanks to everyone who joined us on Saturday for our recent book group. I've posted the next one <a href="{{{event_url}}}">here on meetup</a>.
+{{^online_event}}
+    Please RSVP if you're planning on coming so we don't run out of seats. {{#has_unusual_location}}Note the different location!{{/has_unusual_location}}
+{{/online_event}}
+{{#online_event}}
+    Please RSVP on Meetup if you're planning on joining so we can send you an invite link and get a sense of expected attendance.
+{{/online_event}}
 </p>
 
 <p>
@@ -14,9 +20,16 @@ Author: {{author}}<br>
 Date: {{weekday}}, {{date_str}}<br>
 Time: {{time_str}}<br>
 Location:
-    {{#has_unusual_location}}<span style="background-color: #FFEA66">{{/has_unusual_location}}
-        {{location}}
-    {{#has_unusual_location}}</span>{{/has_unusual_location}}
+    {{^online_event}}
+        {{#has_unusual_location}}<span style="background-color: #FFEA66">{{/has_unusual_location}}
+            {{location}}
+        {{#has_unusual_location}}</span>{{/has_unusual_location}}
+    {{/online_event}}
+    {{#online_event}}
+        <span style="background-color: #FFEA66">
+            Video chat - I'll send an invite to all RSVPs
+        </span>
+    {{/online_event}}
 </strong>
 </p>
 

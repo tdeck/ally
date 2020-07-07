@@ -12,15 +12,34 @@ Author: {{author}}<br>
 Date: {{weekday}}, {{date_str}}<br>
 Time: {{time_str}}<br>
 Location:
-    {{#has_unusual_location}}<span style="background-color: #FFEA66">{{/has_unusual_location}}
-        {{location}}
-    {{#has_unusual_location}}</span>{{/has_unusual_location}}
+    {{^online_event}}
+        {{#has_unusual_location}}<span style="background-color: #FFEA66">{{/has_unusual_location}}
+            {{location}}
+        {{#has_unusual_location}}</span>{{/has_unusual_location}}
+    {{/online_event}}
+    {{#online_event}}
+        Zoom video conference:
+    {{/online_event}}
 </strong>
 </p>
 
-<p>
-    Thanks to everyone who already RSVP'd <a href="{{{event_url}}}">on Meetup</a> - that helps us make sure there's enough space for everyone.
-</p>
+
+{{^online_event}}
+    <p>
+        Thanks to everyone who already RSVP'd <a href="{{{event_url}}}">on Meetup</a> - that helps us make sure there's enough space for everyone.
+    </p>
+{{/online_event}}
+{{#online_event}}
+    </p>
+        We will be using Zoom for videoconferencing. It's free to use, doesn't require an account, and works on most systems. Just follow the info at the bottom of this email to get started. If you don't have a microphone and webcam on your laptop, you can use a smartphone. Or you can even call in on the telephone using the call-in number below, although you won't be able to see anyone. <a href="https://support.zoom.us/hc/en-us/articles/201362193-Joining-a-Meeting">This page has instructions on using Zoom.</a> Here's the full invite info:
+    </p>
+
+    <small>
+        <p>
+            (TODO zoom info here)
+        </p>
+    </small>
+{{/online_event}}
 
 <p>
     Hope to see you there!

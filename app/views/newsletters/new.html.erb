@@ -1,5 +1,5 @@
 <h1>New Newsletter</h1>
-<%= form_tag(newsletters_path, multipart: true) do %>
+<%= form_tag(newsletters_path, multipart: true, target: '_blank') do %>
   <div class="card">
     <header>Intro content</header>
     <section>
@@ -77,5 +77,5 @@
     </div>
   <% end %>
 
-  <%= submit_tag 'Preview' %>
+  <%= submit_tag 'Preview', data: { disable_with: false } %>
 <% end # form %>

@@ -16,7 +16,10 @@ module BookgroupHelper
     if m[:room].present?
       has_unusual_location = false
       location = "#{m[:room]}, Main Library"
-     else
+    elsif event[:is_online_event]
+      has_unusual_location = false
+      location = "Online event"
+    else
       has_unusual_location = true
       location = "#{event[:venue][:name]}, #{event[:venue][:address_1]}" +
           if event[:how_to_find_us].present?

@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'badge_printout/new'
-  get 'badge_printout/show'
   get '/', :to => 'home#index'
 
   resources :events, only: [:index, :show] do

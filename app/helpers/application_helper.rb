@@ -1,4 +1,6 @@
 module ApplicationHelper
+  NEAR_EXPIRY_SECONDS = 60
+
   def valid_session?
     if session['uid'].nil? || session['credentials'].nil?
       return false
@@ -7,6 +9,10 @@ module ApplicationHelper
       return false
     end
     true
+  end
+
+  def session_near_expiry?
+    valid_session? && session['credentials']['expires_at'] <= Time.now.to_i + NEAR_EXPIRY_SECONDS
   end
 
   def oauth_token

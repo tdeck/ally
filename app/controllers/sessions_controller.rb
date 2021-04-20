@@ -20,6 +20,13 @@ class SessionsController < ApplicationController
     redirect_to request.env['omniauth.origin'] || { controller: 'events', action: 'index' }
   end
 
+  def get
+    render json: {
+      valid: valid_session?,
+      near_expiry: session_near_expiry?
+    }
+  end
+
   def failure
   end
 

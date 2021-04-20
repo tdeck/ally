@@ -4,7 +4,7 @@ function checkForSession() {
   var modal = document.getElementById('session-saver-overlay');
 
   fetch('/session')
-    .then(function(response) { response.json(); })
+    .then(function(response) { return response.json(); })
     .then(function(data) {
       // We use near_expiry to provide a grace period so that the session won't expire between
       // the next check and hitting submit

@@ -1,7 +1,7 @@
-const SESSION_CHECK_INTERVAL_MS = 20_000;
+var SESSION_CHECK_INTERVAL_MS = 20_000;
 
 function checkForSession() {
-  const modal = document.getElementById('session-saver-overlay');
+  var modal = document.getElementById('session-saver-overlay');
 
   fetch('/session')
     .then(response => response.json())

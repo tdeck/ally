@@ -1,4 +1,4 @@
-var SESSION_CHECK_INTERVAL_MS = 20_000;
+var SESSION_CHECK_INTERVAL_MS = 20000;
 
 function checkForSession() {
   var modal = document.getElementById('session-saver-overlay');

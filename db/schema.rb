@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2019_02_11_042447) do
 
-  create_table "cross_posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "cross_posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "source_meetup"
     t.string "source_id"
     t.string "dest_meetup"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2019_02_11_042447) do
     t.string "post_link"
   end
 
-  create_table "image_uploads", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "image_uploads", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "sha1", limit: 40, null: false
     t.string "title"
     t.binary "bytes", limit: 16777215, null: false
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2019_02_11_042447) do
     t.index ["sha1"], name: "index_image_uploads_on_sha1", unique: true
   end
 
-  create_table "meetup_events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "meetup_events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "muid", limit: 32
     t.string "name"
     t.string "status"
@@ -44,14 +44,14 @@ ActiveRecord::Schema.define(version: 2019_02_11_042447) do
     t.index ["muid"], name: "index_meetup_events_on_muid", unique: true
   end
 
-  create_table "named_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "named_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "full_name"
     t.string "meetup_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "non_meetup_events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "non_meetup_events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "url"
     t.string "title"
     t.string "location"
@@ -62,8 +62,8 @@ ActiveRecord::Schema.define(version: 2019_02_11_042447) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "settings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "key"
+  create_table "settings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "key", limit: 191
     t.text "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

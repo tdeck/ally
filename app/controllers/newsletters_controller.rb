@@ -1,4 +1,5 @@
 class NewslettersController < ApplicationController
+   include ActionView::Helpers::TextHelper
   NUM_EVENTS = 10
   STYLESHEET_FILES = ['email.css', 'time.css']
 
@@ -15,7 +16,7 @@ class NewslettersController < ApplicationController
           mday: time.mday,
           wday: time.strftime('%A'),
           location: format_location(event),
-          description_html: event[:description], # TODO add br
+          description_html: simple_format(event[:description]),
         }
       } + NonMeetupEvent.not_ended.order(:start_date).map(&:present)
   end

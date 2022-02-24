@@ -36,7 +36,7 @@ class SessionsController < ApplicationController
   end
 
   def admin_emails
-    Setting.get_str(SettingsKeys::ADMIN_EMAILS).strip.downcase.split(/\r?\n/) +
+    (Setting.get_str(SettingsKeys::ADMIN_EMAILS) || '').strip.downcase.split(/\r?\n/) +
       Rails.application.config.sysadmin_emails
   end
 end

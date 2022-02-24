@@ -8,16 +8,14 @@ class MeetupClient
   end
 
   def get_profile_info
-    res = RestClient.get(
-      "https://api.meetup.com/members/self",
-      Authorization: "Bearer #{@oauth_token}",
-      params: {
-        fields: 'memberships',
-      },
+    res = RestClient.post(
+      "https://api.meetup.com/gql",
+      {query: ' query { self { id name email memberships { edges { node { name urlname } metadata { status role }}}}}'}.to_json,
       accept: :json,
+      content_type: :json,
+      Authorization: "Bearer #{@oauth_token}",
     )
-
-    JSON.parse(res.body).with_indifferent_access
+    JSON.parse(res.body)['data']['self'].with_indifferent_access
   end
 
   def get_event(group, id)
@@ -34,8 +32,9 @@ class MeetupClient
   end
 
   def list_managed_groups
-    get_profile_info['memberships']['organizer']
-      .map { |g| g['group'].with_indifferent_access }
+    get_profile_info['memberships']['edges']
+      .select { |e| e['metadata']['status'] == 'LEADER' }
+      .map { |e| e['node'].with_indifferent_access }
   end
 
   def list_upcoming_events(group, count)

@@ -38,7 +38,38 @@ class MeetupClient
   end
 
   def list_upcoming_events(group, count)
-    list_events(group, page: count, scroll: 'next_upcoming')
+    query = <<-END
+      query ($groupslug: String!, $count: Int!) {
+        groupByUrlname(urlname: $groupslug) {
+          upcomingEvents(input: {first: $count}) {
+            edges {
+              node {
+                id
+                dateTime
+                title
+                eventUrl
+                description
+                isOnline
+                venue {
+                  name
+                  address
+                  city
+                }
+              }
+            }
+          }
+        }
+      }
+    END
+
+    res = RestClient.post(
+      "https://api.meetup.com/gql",
+      {query: query, variables: {groupslug: group, count: count}}.to_json,
+      accept: :json,
+      content_type: :json,
+      Authorization: "Bearer #{@oauth_token}",
+    )
+    JSON.parse(res.body)['data']['groupByUrlname']['upcomingEvents']['edges'].map { |e| e['node'].with_indifferent_access }
   end
 
   def list_recent_past_events(group, count)

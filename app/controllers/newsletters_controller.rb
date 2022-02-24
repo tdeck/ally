@@ -6,16 +6,16 @@ class NewslettersController < ApplicationController
     @templated_events = meetup_client
       .list_upcoming_events(Rails.application.config.group_slug, NUM_EVENTS)
       .map { |event|
-        time = Time.at(event[:time] / 1000)
+        time = Time.parse(event[:dateTime])
         {
           id: event[:id],
-          url: event[:link],
-          title: event[:name],
+          url: event[:eventUrl],
+          title: event[:title],
           month: time.strftime('%B'),
           mday: time.mday,
           wday: time.strftime('%A'),
           location: format_location(event),
-          description_html: event[:description],
+          description_html: event[:description], # TODO add br
         }
       } + NonMeetupEvent.not_ended.order(:start_date).map(&:present)
   end

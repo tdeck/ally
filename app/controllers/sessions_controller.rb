@@ -5,7 +5,6 @@ class SessionsController < ApplicationController
     auth = request.env['omniauth.auth']
 
     uid = auth.uid
-    raise 'Wrong uid type' unless uid.is_a?(Integer)
 
     email = MeetupClient.new(auth.credentials['token']).get_user_email
 

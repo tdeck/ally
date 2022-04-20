@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/tdeck/omniauth-meetup
-  revision: 8e6be48a72f1d3661ba3c13f1ebe4146e48a0421
+  revision: efe63f468956c6ff714d641e03e9fccfd0c081e7
   specs:
-    omniauth-meetup (0.0.8)
+    omniauth-meetup (0.0.9)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.0)
 
@@ -329,7 +329,7 @@ DEPENDENCIES
   mini_racer
   mustache
   mysql2
-  omniauth-meetup!
+  omniauth-meetup (= 0.0.9)!
   ostruct
   paper_trail
   premailer

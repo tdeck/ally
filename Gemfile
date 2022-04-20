@@ -38,7 +38,7 @@ gem 'paper_trail'
 
 gem 'rest-client'
 
-gem 'omniauth-meetup', git: 'https://github.com/tdeck/omniauth-meetup'
+gem 'omniauth-meetup', '0.0.9', git: 'https://github.com/tdeck/omniauth-meetup'
 
 gem 'mustache'
 gem 'premailer'

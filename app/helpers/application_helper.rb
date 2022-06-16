@@ -16,7 +16,6 @@ module ApplicationHelper
   end
 
   def attempt_token_refresh
-    Rails.logger.info "SC: #{session['credentials'].inspect}"
     refresh_token = session['credentials']['refresh_token']
     return unless refresh_token.present?
 

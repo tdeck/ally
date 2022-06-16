@@ -2,21 +2,52 @@ module ApplicationHelper
   NEAR_EXPIRY_SECONDS = 60
 
   def valid_session?
+
     if session['uid'].nil? || session['credentials'].nil?
       return false
+    elsif session_near_expiry?
+      attempt_token_refresh
     elsif session['credentials']['expires_at'] <= Time.now.to_i
-      session.delete('credentials') # Wipe out expired credentials
+      session.delete('credentials') # Wipe out expired credentials that we couldn't refresh
       return false
     end
-    true
+
+    return true
+  end
+
+  def attempt_token_refresh
+    Rails.logger.info "SC: #{session['credentials'].inspect}"
+    refresh_token = session['credentials']['refresh_token']
+    return unless refresh_token.present?
+
+    oauth = OmniAuth::Strategies::Meetup.new(
+      nil, # app
+      Rails.application.credentials.dig(:meetup_oauth, Rails.env.to_sym, :key),
+      Rails.application.credentials.dig(:meetup_oauth, Rails.env.to_sym, :secret),
+    )
+
+    token = OAuth2::AccessToken.new(
+      oauth.client,
+      oauth_token,
+      { refresh_token: refresh_token }
+    )
+    new_token = token.refresh!
+
+    session['credentials']['token'] = new_token.token
+    session['credentials']['expires_at'] = new_token.expires_at
+
   end
 
   def session_near_expiry?
-    valid_session? && session['credentials']['expires_at'] <= Time.now.to_i + NEAR_EXPIRY_SECONDS
+    session['credentials']['expires_at'] <= Time.now.to_i + NEAR_EXPIRY_SECONDS
   end
 
   def oauth_token
     session['credentials']['token']
+  end
+
+  def session_expiry
+    Time.at(session['credentials']['expires_at'])
   end
 
   def meetup_client
